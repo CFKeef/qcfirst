@@ -1,15 +1,25 @@
-import Head from "next/head";
 import React from "react";
-
-import { Page } from "../components/general/styledcomponents";
+import styled from "styled-components";
+import Form from "../components/general/login/form";
+import {
+	CenteredContentPage,
+	BorderedContainer,
+	Header,
+	SubHeader,
+} from "../components/general/styledcomponents";
 import ThemeToggle from "../components/general/themetoggle";
 
-const Home: React.FunctionComponent = () => {
+const Login: React.FunctionComponent = () => {
 	return (
-		<Page>
-			<ThemeToggle />
-		</Page>
+		<CenteredContentPage>
+			<BorderedContainer style={{ padding: "2REM" }}>
+				<Header>Coursor</Header>
+				<SubHeader>Welcome Back!</SubHeader>
+				<Form />
+				<ThemeToggle />
+			</BorderedContainer>
+		</CenteredContentPage>
 	);
 };
 
-export default Home;
+export default Login;

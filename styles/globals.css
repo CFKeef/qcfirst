@@ -28,3 +28,36 @@ a {
 * {
 	box-sizing: border-box;
 }
+
+.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+	background-color: var(--fg) !important;
+}
+
+.react-toggle--checked .react-toggle-track {
+	background-color: var(--fg) !important;
+}
+
+.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+	background-color: var(--fg) !important;
+}
+
+.react-toggle-track {
+	background-color: var(--fg) !important;
+}
+
+.react-toggle--focus .react-toggle-thumb {
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.react-toggle:active:not(.react-toggle--disabled) .react-toggle-thumb {
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.react-toggle-thumb {
+	border: var(--fg) !important;
+	background-color: var(--bg) !important;
+}

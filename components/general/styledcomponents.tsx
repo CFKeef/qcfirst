@@ -23,8 +23,10 @@ export const Container = styled.div`
 `;
 
 export const BorderedContainer = styled(Container)`
-	border: 1px solid var(--accent2);
-	border-radius: var(--border-radius);
+	@media (min-width: 30em) {
+		border: 1px solid var(--accent2);
+		border-radius: var(--border-radius);
+	}
 `;
 
 export const ColumnContainer = styled.div`
@@ -77,6 +79,8 @@ export const Input = styled.input<{ topSpace?: boolean }>`
 	width: 100%;
 	box-sizing: border-box;
 	margin-top: ${({ topSpace }) => (topSpace ? 24 : 0)}px;
+	justify-content: flex-start;
+	align-items: center;
 
 	&:focus {
 		border-radius: var(--border-radius);
@@ -110,6 +114,7 @@ export const Button = styled.button<{ topSpace?: boolean }>`
 	align-items: center;
 	flex-direction: row;
 	margin-top: ${({ topSpace }) => (topSpace ? 36 : 0)}px;
+	color: var(--bg);
 
 	&:hover {
 		background-color: var(--bg);
@@ -118,5 +123,44 @@ export const Button = styled.button<{ topSpace?: boolean }>`
 	}
 	&:active {
 		opacity: 0.9;
+	}
+`;
+
+export const ParagraphText = styled.p`
+	margin: 0;
+	padding: 0;
+	color: var(--fg);
+	font-size: 1rem;
+`;
+
+export const TextLinkAnchor = styled.a`
+	color: var(--fg);
+	font-size: 1rem;
+	font-weight: bold;
+	letter-spacing: var(--letter-spacing);
+
+	&:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+`;
+
+export const AnchorText = styled(ParagraphText)`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	margin-top: var(--fullgap);
+	a {
+		margin-left: 0.25rem;
+	}
+`;
+
+export const AccountForm = styled.form`
+	@media (min-width: 30em) {
+		width: 20rem;
+	}
+	@media (max-width: 30em) {
+		width: 100%;
 	}
 `;
