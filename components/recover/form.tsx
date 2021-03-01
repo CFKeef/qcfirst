@@ -7,14 +7,13 @@ import {
 	Button,
 	AnchorText,
 	TextLinkAnchor,
-} from "../styledcomponents";
+} from "../general/styledcomponents";
 import { IoMail, IoKey } from "react-icons/io5";
 import styled from "styled-components";
 import Link from "next/link";
 
 type FormData = {
 	email: string;
-	password: string;
 };
 
 const IconInputContainer = styled.div`
@@ -44,28 +43,10 @@ const Form = () => {
 						}}
 					/>
 				</IconInputContainer>
-				{errors.email && <span>Not a valid email</span>}
-				<IconInputContainer>
-					<IconInput
-						topSpace={true}
-						placeholder={"Password"}
-						type="password"
-						name="Password"
-						ref={register({ required: true })}
-					/>
-					<IoKey
-						style={{
-							position: "absolute",
-							left: "10px",
-							top: "36px",
-							fill: "var(--accent2)",
-						}}
-					/>
-				</IconInputContainer>
-				<Button topSpace={true}>Login</Button>
+				<Button topSpace={true}>Recover</Button>
 				<AnchorText>
-					Forgot your info? Recover it
-					<Link href="/recover">
+					Remember your info? Log in
+					<Link href="/">
 						<TextLinkAnchor>here!</TextLinkAnchor>
 					</Link>
 				</AnchorText>

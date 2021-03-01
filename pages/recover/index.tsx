@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../../components/signup/form";
+import Form from "../../components/recover/form";
 import {
 	CenteredContentPage,
 	BorderedContainer,
@@ -8,12 +8,12 @@ import {
 } from "../../components/general/styledcomponents";
 import ThemeToggle from "../../components/general/themetoggle";
 
-const Signup: React.FunctionComponent = () => {
+const Recover: React.FunctionComponent = () => {
 	return (
 		<CenteredContentPage>
 			<BorderedContainer style={{ padding: "2REM" }}>
 				<Header>Coursor</Header>
-				<SubHeader>Create your account</SubHeader>
+				<SubHeader>Recover your account</SubHeader>
 				<Form />
 				<ThemeToggle />
 			</BorderedContainer>
@@ -21,4 +21,4 @@ const Signup: React.FunctionComponent = () => {
 	);
 };
 
-export default Signup;
+export default Recover;

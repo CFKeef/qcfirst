@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Form from "../components/general/login/form";
+import Form from "../components/login/form";
 import {
 	CenteredContentPage,
 	BorderedContainer,

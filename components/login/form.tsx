@@ -7,17 +7,14 @@ import {
 	Button,
 	AnchorText,
 	TextLinkAnchor,
-} from "../styledcomponents";
-import { IoMail, IoKey, IoInformationCircle } from "react-icons/io5";
+} from "../general/styledcomponents";
+import { IoMail, IoKey } from "react-icons/io5";
 import styled from "styled-components";
 import Link from "next/link";
 
 type FormData = {
 	email: string;
 	password: string;
-	firstName: string;
-	lastName: string;
-	role: "Student" | "Teacher";
 };
 
 const IconInputContainer = styled.div`
@@ -33,40 +30,6 @@ const Form = () => {
 			<AccountForm onSubmit={handleSubmit(onSubmit)}>
 				<IconInputContainer>
 					<IconInput
-						placeholder={"First Name"}
-						type="text"
-						name="firstName"
-						ref={register({ required: true })}
-					/>
-					<IoInformationCircle
-						style={{
-							position: "absolute",
-							left: "10px",
-							top: "12px",
-							fill: "var(--accent2)",
-						}}
-					/>
-				</IconInputContainer>
-				<IconInputContainer>
-					<IconInput
-						topSpace={true}
-						placeholder={"Last Name"}
-						type="text"
-						name="lastName"
-						ref={register({ required: true })}
-					/>
-					<IoInformationCircle
-						style={{
-							position: "absolute",
-							left: "10px",
-							top: "36px",
-							fill: "var(--accent2)",
-						}}
-					/>
-				</IconInputContainer>
-				<IconInputContainer>
-					<IconInput
-						topSpace={true}
 						placeholder={"Email Address"}
 						type="email"
 						name="Email"
@@ -76,7 +39,7 @@ const Form = () => {
 						style={{
 							position: "absolute",
 							left: "10px",
-							top: "36px",
+							top: "12px",
 							fill: "var(--accent2)",
 						}}
 					/>
@@ -99,7 +62,7 @@ const Form = () => {
 						}}
 					/>
 				</IconInputContainer>
-				<Button topSpace={true}>Register</Button>
+				<Button topSpace={true}>Login</Button>
 				<AnchorText>
 					Forgot your info? Recover it
 					<Link href="/recover">
@@ -107,8 +70,8 @@ const Form = () => {
 					</Link>
 				</AnchorText>
 				<AnchorText>
-					Have an account? Sign in
-					<Link href="/">
+					Need an account? Sign up
+					<Link href="/signup">
 						<TextLinkAnchor>here!</TextLinkAnchor>
 					</Link>
 				</AnchorText>
