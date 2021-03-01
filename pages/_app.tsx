@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import { ThemeProvider } from "next-themes";
 import "../styles/globals.css";
 import { normalize } from "styled-normalize";
-import type { AppProps } from "next/app";
+import type { AppProps, NextWebVitalsMetric } from "next/app";
 
 // Fonts
 
@@ -66,6 +66,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 			</ThemeProvider>
 		</>
 	);
+}
+
+export function reportWebVitals(metric: NextWebVitalsMetric) {
+	console.log(metric);
 }
 
 export default MyApp;

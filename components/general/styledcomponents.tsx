@@ -81,6 +81,7 @@ export const Input = styled.input<{ topSpace?: boolean }>`
 	margin-top: ${({ topSpace }) => (topSpace ? 24 : 0)}px;
 	justify-content: flex-start;
 	align-items: center;
+	line-height: var(--form-height);
 
 	&:focus {
 		border-radius: var(--border-radius);

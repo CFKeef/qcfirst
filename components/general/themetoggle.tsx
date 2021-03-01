@@ -12,6 +12,10 @@ const ToggleWrapper = styled.label`
 	align-items: center;
 `;
 
+const Skeleton = styled.div`
+	background-color: var(--fg);
+`;
+
 const ThemeToggle: React.FunctionComponent = () => {
 	const { theme, setTheme } = useTheme();
 	const [isMounted, setIsMounted] = useState(false);
@@ -28,7 +32,7 @@ const ThemeToggle: React.FunctionComponent = () => {
 		setIsMounted(true);
 	}, []);
 
-	if (!isMounted) return null;
+	if (!isMounted) return <Skeleton />;
 
 	return (
 		<ToggleWrapper>
