@@ -102,13 +102,13 @@ const Form = () => {
 				<Button topSpace={true}>Register</Button>
 				<AnchorText>
 					Forgot your info? Recover it
-					<Link href="/recover">
+					<Link href="/recover" prefetch={false}>
 						<TextLinkAnchor>here!</TextLinkAnchor>
 					</Link>
 				</AnchorText>
 				<AnchorText>
 					Have an account? Sign in
-					<Link href="/">
+					<Link href="/" prefetch={false}>
 						<TextLinkAnchor>here!</TextLinkAnchor>
 					</Link>
 				</AnchorText>
