@@ -19,6 +19,7 @@ body {
 	--letter-spacing: .05REM;
 	--success: #0070F3;
 	--error: #F33;
+	--small-button: 2REM;
 }
 
 ::selection {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
 	Container,
@@ -11,22 +11,78 @@ import {
 import { IoMail, IoKey, IoInformationCircle } from "react-icons/io5";
 import styled from "styled-components";
 import Link from "next/link";
+import Axios from "axios";
 
 type FormData = {
 	email: string;
 	password: string;
 	firstName: string;
 	lastName: string;
-	role: "Student" | "Teacher";
 };
 
 const IconInputContainer = styled.div`
 	position: relative;
 `;
 
-const Form = () => {
-	const { register, handleSubmit, errors } = useForm<FormData>();
-	const onSubmit = (data: FormData) => console.log(data);
+const ButtonList = styled.ul`
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+`;
+
+const SwitchButton = styled.button<{ position?: string; active?: boolean }>`
+	min-width: 80px;
+	height: var(--small-button);
+	border-radius: ${({ position }) =>
+		position === "left" ? "5px 0 0 5px" : "0 5px 5px 0"};
+	border: 1px solid var(--accent2);
+	background-color: ${({ active }) =>
+		active ? "var(--accent1)" : "var(--bg)"};
+	cursor: pointer;
+
+	span {
+		color: var(--fg);
+		font-size: 0.8rem;
+		font-weight: ${({ active }) => (active ? "bold" : "normal")};
+		letter-spacing: var(--letter-spacing);
+	}
+`;
+
+const Form: React.FunctionComponent = () => {
+	const { register, handleSubmit, setValue, errors } = useForm<FormData>();
+	const [userType, setUserType] = useState("Student");
+	const onSubmit = (data: FormData) => {
+		Axios.post("/api/signup", { ...data, userType }).then((res) => {});
+	};
+
+	const generateSwitch = () => {
+		const handleRadiusSelection = (index: number) => {
+			// If index == 0 then it should be styled with left
+			if (index === 0) return "left";
+			// If indedx == end then it should be right
+			else if (index + 1 === optionSet.length) return "right";
+		};
+		const optionSet = ["Student", "Teacher"];
+
+		return (
+			<ButtonList>
+				{optionSet.map((option, index) => {
+					return (
+						<li key={option + index}>
+							<SwitchButton
+								active={userType === option}
+								position={handleRadiusSelection(index)}
+								type="button"
+								onClick={() => setUserType(option)}
+							>
+								<span>{option}</span>
+							</SwitchButton>
+						</li>
+					);
+				})}
+			</ButtonList>
+		);
+	};
 
 	return (
 		<Container style={{ margin: "2rem 0" }}>
@@ -99,6 +155,16 @@ const Form = () => {
 						}}
 					/>
 				</IconInputContainer>
+				<AnchorText
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						flexDirection: "row",
+					}}
+				>
+					What are you? {generateSwitch()}{" "}
+				</AnchorText>
+
 				<Button topSpace={true}>Register</Button>
 				<AnchorText>
 					Forgot your info? Recover it

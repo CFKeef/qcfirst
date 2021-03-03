@@ -114,7 +114,7 @@ export const Button = styled.button<{ topSpace?: boolean }>`
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	margin-top: ${({ topSpace }) => (topSpace ? 36 : 0)}px;
+	margin-top: ${({ topSpace }) => (topSpace ? 12 : 0)}px;
 	color: var(--bg);
 
 	&:hover {

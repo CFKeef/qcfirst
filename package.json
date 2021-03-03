@@ -8,7 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "cookie": "^0.4.1",
+    "faunadb": "^4.1.1",
     "mongodb": "^3.6.4",
     "next": "10.0.7",
     "next-compose-plugins": "^2.2.1",

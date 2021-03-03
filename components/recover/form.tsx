@@ -20,7 +20,7 @@ const IconInputContainer = styled.div`
 	position: relative;
 `;
 
-const Form = () => {
+const Form: React.FunctionComponent = () => {
 	const { register, handleSubmit, errors } = useForm<FormData>();
 	const onSubmit = (data: FormData) => console.log(data);
 
@@ -31,7 +31,7 @@ const Form = () => {
 					<IconInput
 						placeholder={"Email Address"}
 						type="email"
-						name="Email"
+						name="email"
 						ref={register({ required: true })}
 					/>
 					<IoMail

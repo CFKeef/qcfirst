@@ -11,6 +11,7 @@ import {
 import { IoMail, IoKey } from "react-icons/io5";
 import styled from "styled-components";
 import Link from "next/link";
+import Axios from "axios";
 
 type FormData = {
 	email: string;
@@ -21,9 +22,12 @@ const IconInputContainer = styled.div`
 	position: relative;
 `;
 
-const Form = () => {
+const Form: React.FunctionComponent = () => {
 	const { register, handleSubmit, errors } = useForm<FormData>();
-	const onSubmit = (data: FormData) => console.log(data);
+	const onSubmit = (data: FormData) =>
+		Axios.post("/api/login", data).then((res) => {
+			console.log(res);
+		});
 
 	return (
 		<Container style={{ margin: "2rem 0" }}>
