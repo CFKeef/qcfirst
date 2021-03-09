@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import {
 	Container,
 	AccountForm,
@@ -49,10 +50,15 @@ const SwitchButton = styled.button<{ position?: string; active?: boolean }>`
 `;
 
 const Form: React.FunctionComponent = () => {
-	const { register, handleSubmit, setValue, errors } = useForm<FormData>();
+	const { register, handleSubmit, errors } = useForm<FormData>();
 	const [userType, setUserType] = useState("Student");
+	const router = useRouter();
 	const onSubmit = (data: FormData) => {
-		Axios.post("/api/signup", { ...data, userType }).then((res) => {});
+		Axios.post("/api/signup", { ...data, userType }).then((res) => {
+			// Success
+			if (res.status === 200) router.replace("/success/signup");
+			// Error
+		});
 	};
 
 	const generateSwitch = () => {

@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import styled from "styled-components";
 import Form from "../components/login/form";
 import {
@@ -12,6 +13,9 @@ import ThemeToggle from "../components/general/themetoggle";
 const Login: React.FunctionComponent = () => {
 	return (
 		<CenteredContentPage>
+			<Head>
+				<title>Welcome!</title>
+			</Head>
 			<BorderedContainer style={{ padding: "2REM" }}>
 				<Header>Coursor</Header>
 				<SubHeader>Welcome Back!</SubHeader>

@@ -9,7 +9,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 		const data = await req.body;
 		const email = data.Email;
 		const password = data.Password;
-		console.log(data);
+
 		try {
 			if (!email || !password)
 				throw new Error("email and password must be provided.");
@@ -25,6 +25,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 							firstName: data.firstName,
 							lastName: data.lastName,
 							role: data.userType,
+							authenticated: false,
 						},
 					})
 				);

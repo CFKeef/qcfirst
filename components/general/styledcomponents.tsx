@@ -6,9 +6,10 @@ export const Page = styled.div`
 	justify-content: flex-start;
 	align-items: center;
 	flex-direction: column;
-	height: 100vh;
+	min-height: 100vh;
+	min-height: -webkit-fill-available;
 	width: 100vw;
-	overflow: clip;
+	overflow: none;
 `;
 
 export const CenteredContentPage = styled(Page)`
@@ -48,12 +49,14 @@ export const Header = styled.h1`
 	color: var(--text);
 	width: 100%;
 	text-align: center;
+	margin: 0;
 `;
 
 export const SubHeader = styled.h2`
 	color: var(--text);
 	width: 100%;
 	text-align: center;
+	margin: 1rem 0;
 `;
 
 export const InputLabel = styled.label<{ topSpace?: boolean }>`
@@ -114,7 +117,7 @@ export const Button = styled.button<{ topSpace?: boolean }>`
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	margin-top: ${({ topSpace }) => (topSpace ? 12 : 0)}px;
+	margin-top: ${({ topSpace }) => (topSpace ? 16 : 0)}px;
 	color: var(--bg);
 
 	&:hover {
@@ -127,7 +130,7 @@ export const Button = styled.button<{ topSpace?: boolean }>`
 	}
 `;
 
-export const ParagraphText = styled.p`
+export const ParagraphText = styled.span`
 	margin: 0;
 	padding: 0;
 	color: var(--fg);
