@@ -8,6 +8,7 @@ import {
 	CenteredContentPage,
 } from "../../components/general/styledcomponents";
 import { AiFillCheckCircle } from "react-icons/ai";
+import Head from "next/head";
 
 const CheckMark = styled(AiFillCheckCircle)`
 	height: 10rem;
@@ -43,6 +44,9 @@ const Success: React.FunctionComponent = () => {
 
 	return (
 		<CenteredContentPage>
+			<Head>
+				<title>Success!</title>
+			</Head>
 			<Header>Success!</Header>
 			<SubHeader>{generateSubHeader()}</SubHeader>
 			<CheckMark />

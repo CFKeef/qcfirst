@@ -7,7 +7,7 @@ import {
 	SubHeader,
 } from "../../components/general/styledcomponents";
 import ThemeToggle from "../../components/general/themetoggle";
-import Head from "next/Head";
+import Head from "next/head";
 
 const Signup: React.FunctionComponent = () => {
 	return (
