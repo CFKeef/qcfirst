@@ -1,9 +1,11 @@
+import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { ThemeProvider } from "next-themes";
 import "../styles/globals.css";
 import { normalize } from "styled-normalize";
 import type { AppProps, NextWebVitalsMetric } from "next/app";
-
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Hydrate } from "react-query/hydration";
 // Fonts
 
 const GlobalStyle = createGlobalStyle`
@@ -59,12 +61,21 @@ body {
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
+	const queryClientRef = React.useRef();
+
+	if (!queryClientRef.current) {
+		queryClientRef.current = new QueryClient();
+	}
 	return (
 		<>
-			<GlobalStyle />
-			<ThemeProvider>
-				<Component {...pageProps} />
-			</ThemeProvider>
+			<QueryClientProvider client={queryClientRef.current}>
+				<Hydrate state={pageProps.dehydratedState}>
+					<GlobalStyle />
+					<ThemeProvider>
+						<Component {...pageProps} />
+					</ThemeProvider>
+				</Hydrate>
+			</QueryClientProvider>
 		</>
 	);
 }

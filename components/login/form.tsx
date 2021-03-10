@@ -12,7 +12,7 @@ import { IoMail, IoKey } from "react-icons/io5";
 import styled from "styled-components";
 import Link from "next/link";
 import Axios from "axios";
-
+import { useRouter } from "next/router";
 type FormData = {
 	email: string;
 	password: string;
@@ -23,10 +23,13 @@ const IconInputContainer = styled.div`
 `;
 
 const Form: React.FunctionComponent = () => {
+	const router = useRouter();
 	const { register, handleSubmit, errors } = useForm<FormData>();
 	const onSubmit = (data: FormData) =>
 		Axios.post("/api/login", data).then((res) => {
-			console.log(res);
+			// Success
+			if (res.status === 200) router.replace("/dashboard");
+			// Error
 		});
 
 	return (

@@ -1,14 +1,14 @@
 import faunadb from "faunadb";
 let cookie = require("cookie");
 
-export const FAUNA_SECRET_COOKIE = "faunaSecret";
+export const FAUNA_SECRET_COOKIE = process.env.FAUNADB_SECRET_COOKIE;
 
 export const serverClient = new faunadb.Client({
 	secret: process.env.FAUNA_DB_KEY as string,
 });
 
 export const faunaClient = (secret: string) => {
-	new faunadb.Client({
+	return new faunadb.Client({
 		secret,
 	});
 };

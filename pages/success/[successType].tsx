@@ -14,6 +14,7 @@ const CheckMark = styled(AiFillCheckCircle)`
 	height: 10rem;
 	width: auto;
 	margin-bottom: 2rem;
+	fill: var(--fg);
 `;
 
 const Success: React.FunctionComponent = () => {
