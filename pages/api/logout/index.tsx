@@ -6,5 +6,3 @@ const handler = nc<
 	AuthorizedRequest,
 	NextApiResponse
 >().post(async (req, res) => {});
-
-export default handler;

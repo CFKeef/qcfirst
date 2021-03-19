@@ -1,8 +1,0 @@
-type User {
-	email: String @unique
-	password: String
-}
-
-type Query {
-	getUser: User
-}

@@ -6,7 +6,7 @@ import { normalize } from "styled-normalize";
 import type { AppProps, NextWebVitalsMetric } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
-// Fonts
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const GlobalStyle = createGlobalStyle`
 ${normalize}

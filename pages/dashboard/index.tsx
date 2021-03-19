@@ -2,7 +2,8 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useQuery } from "react-query";
-import { withAuthSync } from "../../util/auth";
+
+interface DashboardProps {}
 
 const Dashboard: React.FunctionComponent = () => {
 	const router = useRouter();
@@ -20,4 +21,4 @@ const Dashboard: React.FunctionComponent = () => {
 	return <span>sdsadad{console.log(data)}</span>;
 };
 
-export default withAuthSync(Dashboard);
+export default Dashboard;
