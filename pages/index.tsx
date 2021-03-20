@@ -10,7 +10,17 @@ import {
 } from "../components/general/styledcomponents";
 import ThemeToggle from "../components/general/themetoggle";
 
-const Login: React.FunctionComponent = () => {
+type FormPage = {
+	session: any;
+	csrfToken: String;
+	providers: any;
+};
+
+const Login: React.FunctionComponent<FormPage> = ({
+	session,
+	csrfToken,
+	providers,
+}: FormPage) => {
 	return (
 		<CenteredContentPage>
 			<Head>

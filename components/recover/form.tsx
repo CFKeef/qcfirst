@@ -22,7 +22,7 @@ const IconInputContainer = styled.div`
 
 const Form: React.FunctionComponent = () => {
 	const { register, handleSubmit, errors } = useForm<FormData>();
-	const onSubmit = (data: FormData) => console.log(data);
+	const onSubmit = (data: FormData) => console.log("recover");
 
 	return (
 		<Container style={{ margin: "2rem 0" }}>

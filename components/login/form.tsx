@@ -12,6 +12,7 @@ import { IoMail, IoKey } from "react-icons/io5";
 import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 type FormData = {
 	email: string;
@@ -24,7 +25,7 @@ const IconInputContainer = styled.div`
 
 const Form: React.FunctionComponent = () => {
 	const router = useRouter();
-	const { register, handleSubmit, errors } = useForm<FormData>();
+	const { register, handleSubmit, errors, getValues } = useForm<FormData>();
 	const onSubmit = (data: FormData) => {};
 
 	return (

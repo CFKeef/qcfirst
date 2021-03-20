@@ -18,7 +18,7 @@ const Dashboard: React.FunctionComponent = () => {
 		if (error) router.push("/");
 	}, [error, router]);
 
-	return <span>sdsadad{console.log(data)}</span>;
+	return <span>sdsadad{console.log(data + "dsadasdsa")}</span>;
 };
 
 export default Dashboard;

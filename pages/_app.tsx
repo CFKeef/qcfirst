@@ -8,6 +8,7 @@ import type { AppProps, NextWebVitalsMetric } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { Provider } from "next-auth/client";
 
 const GlobalStyle = createGlobalStyle`
 ${normalize}
@@ -73,7 +74,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<Hydrate state={pageProps.dehydratedState}>
 					<GlobalStyle />
 					<ThemeProvider>
-						<Component {...pageProps} />
+						<Provider session={pageProps.session}>
+							<Component {...pageProps} />
+						</Provider>
 					</ThemeProvider>
 				</Hydrate>
 			</QueryClientProvider>
