@@ -26,7 +26,11 @@ const IconInputContainer = styled.div`
 const Form: React.FunctionComponent = () => {
 	const router = useRouter();
 	const { register, handleSubmit, errors, getValues } = useForm<FormData>();
-	const onSubmit = (data: FormData) => {};
+	const onSubmit = (data: FormData) => {
+		axios.post("/api/login", data).then((res) => {
+			if (res.status === 200) router.push("/dashboard");
+		});
+	};
 
 	return (
 		<Container style={{ margin: "2rem 0" }}>
