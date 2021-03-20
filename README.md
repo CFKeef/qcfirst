@@ -7,8 +7,8 @@
 ### Current Goal: MVP
 
 MVP will require:
--Users
 
+-   Users
 -   Support for Students
 -   Support for Professors
     -Session
