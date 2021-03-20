@@ -1,34 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Banner Image](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/Banner.png)
 
-## Getting Started
+# Coursor
 
-First, run the development server:
+## A Course management system for students and teachers
 
-```bash
-npm run dev
-# or
+### Current Goal: MVP
+
+MVP will require:
+-Users
+
+-   Support for Students
+-   Support for Professors
+    -Session
+    -CRUD Bits
+-   CRUD Ops on Courses
+-   Crud Ops for User Accounts
+    -Enrollment Manage
+-   Validation Logic
+
+### To use it
+
+Just head over to [the deployed site and take a look!](https://coursor.io)
+
+OR
+
+Clone the repo and type
+
+```
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You will need to set environment variables for your DATABASE_URL
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Features
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+-Handles both students and teachers
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+-   Students are able to view courses enrolled, courses offered and enroll into new ones
+-   Teachers are able to view courses they are teaching and create new courses
 
-## Learn More
+-All CRUD operations are supported
+-Day/Night theme
 
-To learn more about Next.js, take a look at the following resources:
+### Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Heres the general look of the pages but they are subject to change as I bring it to development. Notes may be visible as well.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Form Pages (Login, Signup, recover)
 
-## Deploy on Vercel
+![Form Page UI Screenshot on Mobile](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/Screen%20Shot%202021-03-20%20at%2012.44.03%20PM.png)
+![Form Page UI Screenshot on Desktop](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/Screen%20Shot%202021-03-20%20at%2012.45.11%20PM.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Dashboard
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Dasboard UI Screenshot on Mobile](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/Screen%20Shot%202021-03-20%20at%2012.44.19%20PM.png)
+
+#### Course Creation with notes
+
+![Creation UI Screenshot on Mobile](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/Screen%20Shot%202021-03-20%20at%2012.44.38%20PM.png)
+![Creation UI Screenshot on Desktop](https://github.com/CFKeef/qcfirst/blob/main/public/images/readme/Screen%20Shot%202021-03-20%20at%2012.45.02%20PM.png)
+
+#### Course Search with notes
+
+![Search UI Screenshot on Mobile](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/Screen%20Shot%202021-03-20%20at%2012.44.47%20PM.png)
+
+![Search UI Screenshot on Desktop](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/Screen%20Shot%202021-03-20%20at%2012.44.53%20PM.png)
