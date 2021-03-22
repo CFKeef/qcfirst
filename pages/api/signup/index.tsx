@@ -7,25 +7,47 @@ import bcrypt from "bcrypt";
 const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 	async (req, res) => {
 		const data = req.body;
-		console.log(req.body);
+
+		let user;
 		// Hash Pw
 		const hashedPw = await bcrypt.hash(data.Password, 10);
 		// Save to db
-		const student = await prisma.student
-			.create({
-				data: {
-					studentID: Math.floor(Math.random() * 100000),
-					email: data.Email,
-					firstName: data.firstName,
-					lastName: data.lastName,
-					password: hashedPw,
-				},
-			})
-			.catch((err) => {
-				res.status(401).send({ error: err });
-			});
+		if (data.userType === "Student") {
+			user = await prisma.student
+				.create({
+					data: {
+						studentID: Math.floor(Math.random() * 100000),
+						email: data.Email,
+						firstName: data.firstName,
+						lastName: data.lastName,
+						password: hashedPw,
+					},
+				})
+				.catch((e: Error) => {
+					res.status(500).send(e.name + ": Issue with creation");
+				})
+				.finally(() => prisma.$disconnect);
+		} else if (data.userType === "Teacher") {
+			user = await prisma.instructor
+				.create({
+					data: {
+						email: data.Email,
+						firstName: data.firstName,
+						lastName: data.lastName,
+						password: hashedPw,
+					},
+				})
+				.catch((e: Error) => {
+					res.status(500).send(
+						e.name + ": Issue with Teacher creation"
+					);
+				})
+				.finally(() => prisma.$disconnect);
+		} else {
+			res.status(500).send("Issue with Usertype creation");
+		}
 
-		res.status(200).send("Signed up!");
+		if (user) res.status(200).send("Signed up!");
 	}
 );
 

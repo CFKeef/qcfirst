@@ -23,7 +23,7 @@ model Instructor {
   email           String   @unique @db.VarChar(50)
   firstName       String   @db.VarChar(50)
   lastName        String   @db.VarChar(50)
-  password        String   @db.VarChar(50)
+  password        String   @db.VarChar(100)
   authenticated   Boolean  @default(false)
   coursesTeaching Course[]
 }

@@ -13,6 +13,7 @@ import { IoMail, IoKey, IoInformationCircle } from "react-icons/io5";
 import styled from "styled-components";
 import Link from "next/link";
 import Axios from "axios";
+import Note from "../general/note";
 
 type FormData = {
 	email: string;
@@ -52,13 +53,26 @@ const SwitchButton = styled.button<{ position?: string; active?: boolean }>`
 const Form: React.FunctionComponent = () => {
 	const { register, handleSubmit, errors } = useForm<FormData>();
 	const [userType, setUserType] = useState("Student");
+	const [error, setError] = useState(false);
 	const router = useRouter();
 	const onSubmit = (data: FormData) => {
-		Axios.post("/api/signup", { ...data, userType }).then((res) => {
-			// Success
-			if (res.status === 200) router.replace("/success/signup");
-			// Error
-		});
+		Axios.post("/api/signup", { ...data, userType })
+			.then((res) => {
+				// Success
+				if (res.status === 200) {
+					router.replace("/success/signup");
+				}
+			})
+			.catch((err) => {
+				setError(true);
+			});
+	};
+
+	const generateErrorComponent = () => {
+		if (error)
+			return (
+				<Note type="Error" message={"Issues with details provided"} />
+			);
 	};
 
 	const generateSwitch = () => {
@@ -92,6 +106,7 @@ const Form: React.FunctionComponent = () => {
 
 	return (
 		<Container style={{ margin: "2rem 0" }}>
+			{generateErrorComponent()}
 			<AccountForm onSubmit={handleSubmit(onSubmit)}>
 				<IconInputContainer>
 					<IconInput

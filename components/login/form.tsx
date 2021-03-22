@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
 	Container,
@@ -13,6 +13,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Note from "../general/note";
 
 type FormData = {
 	email: string;
@@ -23,17 +24,86 @@ const IconInputContainer = styled.div`
 	position: relative;
 `;
 
+const ButtonList = styled.ul`
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+`;
+
+const SwitchButton = styled.button<{ position?: string; active?: boolean }>`
+	min-width: 80px;
+	height: var(--small-button);
+	border-radius: ${({ position }) =>
+		position === "left" ? "5px 0 0 5px" : "0 5px 5px 0"};
+	border: 1px solid var(--accent2);
+	background-color: ${({ active }) =>
+		active ? "var(--accent1)" : "var(--bg)"};
+	cursor: pointer;
+
+	span {
+		color: var(--fg);
+		font-size: 0.8rem;
+		font-weight: ${({ active }) => (active ? "bold" : "normal")};
+		letter-spacing: var(--letter-spacing);
+	}
+`;
+
 const Form: React.FunctionComponent = () => {
 	const router = useRouter();
-	const { register, handleSubmit, errors, getValues } = useForm<FormData>();
+	const { register, handleSubmit, errors } = useForm<FormData>();
+	const [error, setError] = useState(false);
+	const [userType, setUserType] = useState("Student");
+
 	const onSubmit = (data: FormData) => {
-		axios.post("/api/login", data).then((res) => {
-			if (res.status === 200) router.push("/dashboard");
-		});
+		axios
+			.post("/api/login", { ...data, userType })
+			.then((res) => {
+				if (res.status === 200) router.push("/dashboard");
+			})
+			.catch((err) => {
+				setError(true);
+			});
+	};
+
+	const generateErrorComponent = () => {
+		if (error)
+			return (
+				<Note type="Error" message={"Issues with details provided"} />
+			);
+	};
+
+	const generateSwitch = () => {
+		const handleRadiusSelection = (index: number) => {
+			// If index == 0 then it should be styled with left
+			if (index === 0) return "left";
+			// If indedx == end then it should be right
+			else if (index + 1 === optionSet.length) return "right";
+		};
+		const optionSet = ["Student", "Teacher"];
+
+		return (
+			<ButtonList>
+				{optionSet.map((option, index) => {
+					return (
+						<li key={option + index}>
+							<SwitchButton
+								active={userType === option}
+								position={handleRadiusSelection(index)}
+								type="button"
+								onClick={() => setUserType(option)}
+							>
+								<span>{option}</span>
+							</SwitchButton>
+						</li>
+					);
+				})}
+			</ButtonList>
+		);
 	};
 
 	return (
 		<Container style={{ margin: "2rem 0" }}>
+			{generateErrorComponent()}
 			<AccountForm onSubmit={handleSubmit(onSubmit)}>
 				<IconInputContainer>
 					<IconInput
@@ -69,6 +139,15 @@ const Form: React.FunctionComponent = () => {
 						}}
 					/>
 				</IconInputContainer>
+				<AnchorText
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						flexDirection: "row",
+					}}
+				>
+					What are you? {generateSwitch()}{" "}
+				</AnchorText>
 				<Button topSpace={true}>Login</Button>
 				<AnchorText>
 					Forgot your info? Recover it
