@@ -54,7 +54,7 @@ We use a margin of 20px around the body of the content to keep it from touching 
 
 #### Desktop
 For desktop we use these two components for a responsive layout:
-![Screenshot of components](https://cdn.discordapp.com/attachments/433480728366546946/824058561335656458/carbon.png)
+![Screenshot of components](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/carbon.png)
 
 This gives us an extremely responsive layout that stacks its children like a "stack of books".
 ![Layout for Desktop](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/desktopLayout.png)
