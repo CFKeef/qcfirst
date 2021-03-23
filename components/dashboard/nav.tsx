@@ -23,6 +23,11 @@ const Content = styled.div`
 	@media (min-width: 30em) {
 		max-width: 1100px;
 	}
+
+	@media (max-width: 30em) {
+		margin: 0 20px;
+		width: calc(100% - 40px);
+	}
 `;
 
 const Menu = styled.ul`
