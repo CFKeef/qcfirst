@@ -2,7 +2,7 @@ import nc from "next-connect";
 import { NextApiRequest, NextApiResponse } from "next";
 import { AuthorizedRequest, LoginRes, SignUpRes } from "../../../types/util";
 import prisma from "../../../util/prisma";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 	async (req, res) => {

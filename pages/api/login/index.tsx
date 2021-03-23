@@ -2,7 +2,7 @@ import nc from "next-connect";
 import { NextApiResponse } from "next";
 import { AuthorizedRequest } from "../../../types/util";
 import prisma from "../../../util/prisma";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import withSession from "../../../util/session";
 
 const comparePassToHash = async (pw: string, hash: string) => {
