@@ -1,24 +1,51 @@
+import { Instructor, Student } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useQuery } from "react-query";
+import React, { useEffect, useState } from "react";
+import { useQuery, QueryClient } from "react-query";
+import { dehydrate } from "react-query/hydration";
+import Head from "next/head";
+import { Page } from "../../components/general/styledcomponents";
+import { SPAContentContainer } from "../../components/general/spa";
+import withSession from "../../util/session";
+import Nav from "../../components/dashboard/nav";
 
-interface DashboardProps {}
+interface DashboardProps {
+	user: Student | Instructor;
+}
 
-const Dashboard: React.FunctionComponent = () => {
+const Dashboard: React.FunctionComponent<DashboardProps> = ({ user }) => {
 	const router = useRouter();
-	const { isLoading, data, error } = useQuery("profile", () =>
-		axios.post("/api/user").then((res) => {
-			if (res.status >= 300) throw new Error("API CLIENT ERROR");
-			else return res.data;
-		})
+	return (
+		<Page>
+			<Head>
+				<title>Dashboard</title>
+			</Head>
+			<SPAContentContainer>
+				<Nav />
+			</SPAContentContainer>
+		</Page>
 	);
-
-	useEffect(() => {
-		if (error) router.push("/");
-	}, [error, router]);
-
-	return <span>sdsadad{console.log(data + "dsadasdsa")}</span>;
 };
 
 export default Dashboard;
+
+export const getServerSideProps = withSession(async ({ req, res }) => {
+	const user = req.session.get("user");
+
+	if (user === undefined) {
+		// redirect to log in
+		res.setHeader("location", "/");
+		res.statusCode = 302;
+		res.end();
+		return {
+			props: {},
+		};
+	}
+
+	return {
+		props: {
+			user: req.session.get("user"),
+		},
+	};
+});
