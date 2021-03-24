@@ -33,19 +33,17 @@ export default Dashboard;
 export const getServerSideProps = withSession(async ({ req, res }) => {
 	const user = req.session.get("user");
 
-	if (user === undefined) {
+	if (!user) {
 		// redirect to log in
-		res.setHeader("location", "/");
-		res.statusCode = 302;
-		res.end();
 		return {
-			props: {},
+			redirect: {
+				permanent: false,
+				destination: "/",
+			},
+		};
+	} else {
+		return {
+			props: { user },
 		};
 	}
-
-	return {
-		props: {
-			user: req.session.get("user"),
-		},
-	};
 });

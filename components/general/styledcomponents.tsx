@@ -168,3 +168,32 @@ export const AccountForm = styled.form`
 		width: 100%;
 	}
 `;
+
+export const ResetButton = styled.button`
+	border: none;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	overflow: visible;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	line-height: normal;
+	-webkit-font-smoothing: inherit;
+	-moz-osx-font-smoothing: inherit;
+	-webkit-appearance: none;
+
+	&:hover {
+		cursor: pointer;
+	}
+`;
+
+export const LogoButton = styled(ResetButton)`
+	img {
+		height: 1.5rem;
+		${({ theme }) =>
+			theme === "dark" ? "filter: grayscale(1) invert(1);" : null}
+	}
+`;
+
+export const LogoContainer = styled.div<{ theme: string }>``;

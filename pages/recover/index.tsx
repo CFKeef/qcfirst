@@ -9,18 +9,17 @@ import {
 } from "../../components/general/styledcomponents";
 import ThemeToggle from "../../components/general/themetoggle";
 import withSession from "../../util/session";
+import { redirect } from "next/dist/next-server/server/api-utils";
 
 export const getServerSideProps = withSession(async ({ req, res }) => {
 	const user = req.session.get("user");
 
 	if (user) {
 		// redirect to log in
-		res.setHeader("location", "dashboard");
-		res.statusCode = 302;
-		res.end();
 		return {
-			props: {
-				user: req.session.get("user"),
+			redirect: {
+				permanent: false,
+				destination: "/dashboard",
 			},
 		};
 	} else {

@@ -1,8 +1,14 @@
 import Link from "next/link";
 import React, { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { ParagraphText } from "../general/styledcomponents";
+import {
+	LogoContainer,
+	ParagraphText,
+	ResetButton,
+} from "../general/styledcomponents";
 import { useRouter } from "next/router";
+import LogoHeader from "../general/LogoHeader";
+import axios from "axios";
 
 type menuTab = {
 	value: string;
@@ -15,11 +21,15 @@ const Header = styled.header`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: row;
 `;
 
 const Content = styled.div`
 	width: 100%;
-
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
 	@media (min-width: 30em) {
 		max-width: 1100px;
 	}
@@ -30,13 +40,18 @@ const Content = styled.div`
 	}
 `;
 
+const NavContainer = styled.nav`
+	width: 40%;
+	height: 100%;
+`;
+
 const Menu = styled.ul`
 	padding: 0;
 	margin: 0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 30%;
+	width: 100%;
 	height: 3rem;
 `;
 
@@ -48,12 +63,51 @@ const MenuOption = styled.li<{ selected: boolean }>`
 		selected ? " 2px solid var(--accent8)" : "none"};
 
 	height: 100%;
+	&:hover {
+		border-bottom: ${({ selected }) =>
+			selected
+				? " 2px solid var(--accent8)"
+				: "2px solid var(--accent5)"};
+
+		a {
+			color: ${({ selected }) =>
+				selected ? "var(--text)" : "var(--accent5)"};
+		}
+	}
+
+	&:active {
+		scale: 0.95;
+	}
 `;
 
 const TabText = styled.a<{ selected: boolean }>`
 	font-style: ${({ selected }) => (selected ? "bold" : "normal")};
 	font-size: 14px;
 	color: ${({ selected }) => (selected ? "var(--text)" : "var(--accent3)")};
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const LogOutButton = styled(ResetButton)`
+	background-color: var(--fg);
+	border-radius: var(--border-radius);
+	height: 1.75rem;
+	width: 5rem;
+	color: var(--bg);
+	font-size: 14px;
+	border: 1px solid var(--fg);
+
+	&:hover {
+		opacity: 0.95;
+	}
+
+	&:active {
+		transform: scale(0.95);
+		background-color: var(--error);
+		border: none;
+	}
 `;
 
 const Nav: React.FunctionComponent = () => {
@@ -70,7 +124,7 @@ const Nav: React.FunctionComponent = () => {
 		];
 
 		return (
-			<nav>
+			<NavContainer>
 				<Menu>
 					{menuTabs.map((element, index) => {
 						const selected =
@@ -91,13 +145,26 @@ const Nav: React.FunctionComponent = () => {
 						);
 					})}
 				</Menu>
-			</nav>
+			</NavContainer>
 		);
+	};
+
+	const handleLogout = async () => {
+		axios.post("/api/logout").then(() => router.push("/"));
 	};
 
 	return (
 		<Header id="Header">
-			<Content>{generateMenu()}</Content>
+			<Content>
+				{generateMenu()}
+				<LogOutButton
+					onClick={() => {
+						handleLogout();
+					}}
+				>
+					Log out
+				</LogOutButton>
+			</Content>
 		</Header>
 	);
 };

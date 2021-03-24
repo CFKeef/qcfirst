@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
-import styled from "styled-components";
 import Form from "../components/login/form";
 import {
 	CenteredContentPage,
@@ -9,6 +8,25 @@ import {
 	SubHeader,
 } from "../components/general/styledcomponents";
 import ThemeToggle from "../components/general/themetoggle";
+import withSession from "../util/session";
+
+export const getServerSideProps = withSession(async ({ req, res }) => {
+	const user = req.session.get("user");
+
+	if (user) {
+		// redirect to log in
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/dashboard",
+			},
+		};
+	} else {
+		return {
+			props: {},
+		};
+	}
+});
 
 const Login: React.FunctionComponent = () => {
 	return (

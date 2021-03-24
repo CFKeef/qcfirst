@@ -5,8 +5,8 @@ import withSession from "../../../util/session";
 
 const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 	async (req, res) => {
-		req.session.detroy();
-		res.json({ isLoggedIn: false });
+		req.session.destroy();
+		res.send(200);
 	}
 );
 

@@ -15,12 +15,10 @@ export const getServerSideProps = withSession(async ({ req, res }) => {
 
 	if (user) {
 		// redirect to log in
-		res.setHeader("location", "dashboard");
-		res.statusCode = 302;
-		res.end();
 		return {
-			props: {
-				user: req.session.get("user"),
+			redirect: {
+				permanent: false,
+				destination: "/dashboard",
 			},
 		};
 	} else {
