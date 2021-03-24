@@ -9,6 +9,8 @@ import {
 import { useRouter } from "next/router";
 import LogoHeader from "../general/LogoHeader";
 import axios from "axios";
+import { Instructor, Student } from "@prisma/client";
+import { SessionUserProps } from "../../pages/dashboard";
 
 type menuTab = {
 	value: string;
@@ -131,18 +133,28 @@ const LogoText = styled.h1`
 	margin: 0.5rem 0;
 `;
 
-const Nav: React.FunctionComponent = () => {
+const Nav: React.FunctionComponent<SessionUserProps> = ({
+	user,
+	isStudent,
+}) => {
 	const router = useRouter();
 	/**
 	 * Generates the menu component which includes the Nav and the Logo
 	 */
 	const generateMenu = () => {
-		const menuTabs: menuTab[] = [
+		let menuTabs: menuTab[] = [
 			{ value: "Overview", route: "/dashboard" },
-			{ value: "Academics", route: "/academics" },
+			{ value: "Create", route: "/create" },
 			// { value: "Financial", route: "/financial" },
 			// { value: "Personal", route: "/personal" },
 		];
+
+		if (isStudent) {
+			menuTabs = [
+				{ value: "Overview", route: "/dashboard" },
+				{ value: "Search", route: "/search" },
+			];
+		}
 
 		return (
 			<NavContainer>

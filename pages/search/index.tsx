@@ -1,26 +1,18 @@
 import { Instructor, Student } from "@prisma/client";
-import axios from "axios";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { useQuery, QueryClient } from "react-query";
-import { dehydrate } from "react-query/hydration";
 import Head from "next/head";
-import { Page } from "../../components/general/styledcomponents";
-import { SPAContentContainer } from "../../components/general/spa";
-import withSession from "../../util/session";
-import Nav from "../../components/dashboard/nav";
+
+import React from "react";
 import Hero from "../../components/dashboard/hero";
+import Nav from "../../components/dashboard/nav";
+import { SPAContentContainer } from "../../components/general/spa";
+import { Page } from "../../components/general/styledcomponents";
+import withSession from "../../util/session";
+import { SessionUserProps } from "../dashboard";
 
-export interface SessionUserProps {
-	user: Student | Instructor;
-	isStudent: boolean;
-}
-
-const Dashboard: React.FunctionComponent<SessionUserProps> = ({
+const Search: React.FunctionComponent<SessionUserProps> = ({
 	user,
 	isStudent,
 }) => {
-	const router = useRouter();
 	return (
 		<Page>
 			<Head>
@@ -28,13 +20,12 @@ const Dashboard: React.FunctionComponent<SessionUserProps> = ({
 			</Head>
 			<SPAContentContainer>
 				<Nav user={user} isStudent={isStudent} />
-				<Hero user={user} isStudent={isStudent} />
 			</SPAContentContainer>
 		</Page>
 	);
 };
 
-export default Dashboard;
+export default Search;
 
 export const getServerSideProps = withSession(async ({ req, res }) => {
 	const user = req.session.get("user");

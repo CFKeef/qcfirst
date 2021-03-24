@@ -1,6 +1,7 @@
 import { Instructor, Student } from "@prisma/client";
 import React from "react";
 import styled from "styled-components";
+import { SessionUserProps } from "../../pages/dashboard";
 import { ParagraphText } from "../general/styledcomponents";
 
 const Page = styled.div`
@@ -37,17 +38,22 @@ const IDText = styled(ParagraphText)`
 	margin: 0 0 2rem 0;
 `;
 
-interface HeroProps {
-	user: Student | Instructor;
-}
-
-const Hero: React.FunctionComponent<HeroProps> = ({ user }) => {
+const Hero: React.FunctionComponent<SessionUserProps> = ({
+	user,
+	isStudent,
+}) => {
+	const generateID = () => {
+		if (isStudent) {
+			return <IDText>#{user.id}</IDText>;
+		}
+	};
 	return (
 		<Page>
 			<Container>
 				<GreetingText>Hello,</GreetingText>
+				{console.log(user)}
 				<NameText>{user.firstName + " " + user.lastName}</NameText>
-				<IDText>#{user.id}</IDText>
+				{generateID()}
 			</Container>
 		</Page>
 	);

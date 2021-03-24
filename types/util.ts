@@ -10,3 +10,11 @@ export interface LoginRes extends Object {
 export interface SignUpRes extends Object {
 	ref: any;
 }
+
+export type StudentSession = {
+	email: string,
+	firstName: string,
+	id: number,
+	isStudent: true,
+	lastName: string
+}
