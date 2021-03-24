@@ -9,7 +9,7 @@ import { Page } from "../../components/general/styledcomponents";
 import { SPAContentContainer } from "../../components/general/spa";
 import withSession from "../../util/session";
 import Nav from "../../components/dashboard/nav";
-
+import Hero from "../../components/dashboard/hero";
 interface DashboardProps {
 	user: Student | Instructor;
 }
@@ -23,6 +23,7 @@ const Dashboard: React.FunctionComponent<DashboardProps> = ({ user }) => {
 			</Head>
 			<SPAContentContainer>
 				<Nav />
+				<Hero user={user} />
 			</SPAContentContainer>
 		</Page>
 	);

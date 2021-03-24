@@ -25,7 +25,8 @@ const Header = styled.header`
 `;
 
 const Content = styled.div`
-	width: 100%;
+	margin: 0 20px;
+	width: calc(100% - 40px);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -35,14 +36,20 @@ const Content = styled.div`
 	}
 
 	@media (max-width: 30em) {
-		margin: 0 20px;
-		width: calc(100% - 40px);
+		flex-direction: column;
 	}
 `;
 
 const NavContainer = styled.nav`
 	width: 40%;
 	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	@media (max-width: 30em) {
+		width: 100%;
+	}
 `;
 
 const Menu = styled.ul`
@@ -51,8 +58,12 @@ const Menu = styled.ul`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 100%;
+
 	height: 3rem;
+
+	@media (max-width: 30em) {
+		overflow-y: scroll;
+	}
 `;
 
 const MenuOption = styled.li<{ selected: boolean }>`
@@ -63,6 +74,7 @@ const MenuOption = styled.li<{ selected: boolean }>`
 		selected ? " 2px solid var(--accent8)" : "none"};
 
 	height: 100%;
+	margin-right: 1rem;
 	&:hover {
 		border-bottom: ${({ selected }) =>
 			selected
@@ -88,6 +100,10 @@ const TabText = styled.a<{ selected: boolean }>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	@media (max-width: 30em) {
+		font-size: 0.9rem;
+	}
 `;
 
 const LogOutButton = styled(ResetButton)`
@@ -110,6 +126,11 @@ const LogOutButton = styled(ResetButton)`
 	}
 `;
 
+const LogoText = styled.h1`
+	color: var(--fg);
+	margin: 0.5rem 0;
+`;
+
 const Nav: React.FunctionComponent = () => {
 	const router = useRouter();
 	/**
@@ -119,8 +140,8 @@ const Nav: React.FunctionComponent = () => {
 		const menuTabs: menuTab[] = [
 			{ value: "Overview", route: "/dashboard" },
 			{ value: "Academics", route: "/academics" },
-			{ value: "Financial", route: "/financial" },
-			{ value: "Personal", route: "/personal" },
+			// { value: "Financial", route: "/financial" },
+			// { value: "Personal", route: "/personal" },
 		];
 
 		return (
@@ -145,6 +166,13 @@ const Nav: React.FunctionComponent = () => {
 						);
 					})}
 				</Menu>
+				<LogOutButton
+					onClick={() => {
+						handleLogout();
+					}}
+				>
+					Log out
+				</LogOutButton>
 			</NavContainer>
 		);
 	};
@@ -156,14 +184,8 @@ const Nav: React.FunctionComponent = () => {
 	return (
 		<Header id="Header">
 			<Content>
+				<LogoText>Coursor</LogoText>
 				{generateMenu()}
-				<LogOutButton
-					onClick={() => {
-						handleLogout();
-					}}
-				>
-					Log out
-				</LogOutButton>
 			</Content>
 		</Header>
 	);
