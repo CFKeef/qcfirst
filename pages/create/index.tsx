@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import styled from "styled-components";
+import Form from "../../components/create/form";
 import Nav from "../../components/dashboard/nav";
 import { SPAContentContainer } from "../../components/general/spa";
 import { Page } from "../../components/general/styledcomponents";
@@ -46,6 +47,7 @@ const Create: React.FunctionComponent<SessionUserProps> = ({
 				<PositionContainer>
 					<Container>
 						<PageTitleText>Create your course</PageTitleText>
+						<Form />
 					</Container>
 				</PositionContainer>
 			</SPAContentContainer>

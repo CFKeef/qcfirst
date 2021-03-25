@@ -25,6 +25,7 @@
     "react-hook-form": "^6.15.4",
     "react-icons": "^4.2.0",
     "react-query": "^3.12.0",
+    "react-select": "^4.3.0",
     "react-toggle": "^4.1.1",
     "styled-components": "^5.2.1",
     "styled-normalize": "^8.0.7"
@@ -36,6 +37,7 @@
     "@types/nodemailer": "^6.4.1",
     "@types/pg": "^7.14.11",
     "@types/react": "^17.0.2",
+    "@types/react-select": "^4.0.13",
     "@types/react-toggle": "^4.0.2",
     "@types/styled-components": "^5.1.7",
     "prisma": "2.19.0",
