@@ -13,7 +13,7 @@ const Container = styled.section`
 	width: calc(100%-40px);
 	display: flex;
 	justify-content: flex-start;
-	align-items: flex-start;
+	align-items: center;
 	flex-direction: column;
 	max-width: 1100px;
 	width: 100%;
@@ -60,7 +60,7 @@ export default Create;
 export const getServerSideProps = withSession(async ({ req, res }) => {
 	const user = req.session.get("user");
 
-	if (!user) {
+	if (!user || user.isStudent) {
 		// redirect to log in
 		return {
 			redirect: {

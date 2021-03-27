@@ -1,51 +1,125 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import styled from "styled-components";
 import DropDown from "../general/input/dropdown";
-import { Input, InputLabel } from "../general/styledcomponents";
-import Select from "react-select";
-type day = {
-	value: string;
-	key: number;
-};
+import { InputLabel, TextBox } from "../general/styledcomponents";
+import { days, departments, semesters } from "./data/data";
+import { Input } from "../general/styledcomponents";
+import Checkbox from "../general/input/checkbox";
+import { SelectItem } from "../general/input/Checkboxlist";
 
 type ClassForm = {
-	courseName: string;
-	department: string;
-	description: string;
+	CourseName: string;
+	Department: string;
+	Description: string;
 	startTime: string;
 	endTime: string;
-	days: day[];
+	Semester: string;
+	Days: SelectModel[] | undefined;
 };
 
+interface SelectModel {
+	days: SelectItem[];
+}
 const FormContainer = styled.section`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 40%;
+	flex-direction: column;
+	width: 45%;
+	padding: 2rem 1rem;
+	border: 1px solid var(--accent3);
 `;
 
-const semesterOptions = [
-	{ value: "fall", label: "Fall" },
-	{ value: "winter", label: "Winter" },
-	{ value: "spring", label: "Spring" },
-	{ value: "summer1", label: "Summer Session 1" },
-	{ value: "summer2", label: "Summer Session 2" },
-];
+const FieldSpan = styled.br`
+	margin: 0.5rem 0;
+`;
 
 const Form = () => {
-	const { register, handleSubmit, control } = useForm();
+	const { register, handleSubmit, control, getValues, setValue } = useForm({
+		defaultValues: {
+			days: {
+				selected: [
+					{
+						days: days.map((day) => {
+							return {
+								id: day.value,
+								name: day.label,
+								selected: day.selected,
+							};
+						}),
+					},
+				],
+			},
+		},
+	});
+
+	const { fields, append } = useFieldArray({
+		control,
+		name: "days.selected",
+	});
+
+	const addToArrayField = () => {
+		append({});
+	};
+
 	const onSubmit = (data: ClassForm) => {
 		console.log(JSON.stringify(data));
+	};
+
+	const generateCheckBoxes = () => {
+		console.log(getValues("Days"));
+		return (
+			<ul>
+				{days.map((element) => {
+					return (
+						<li key={element.label}>
+							<input
+								type={"checkbox"}
+								name={"Days"}
+								value={element.selected}
+							/>
+						</li>
+					);
+				})}
+			</ul>
+		);
 	};
 
 	return (
 		<FormContainer>
 			<DropDown
 				fieldName="Semester"
-				data={semesterOptions}
+				data={semesters}
 				control={control}
+				id={"semester"}
 			/>
+			<FieldSpan />
+			<DropDown
+				fieldName="Department"
+				data={departments}
+				control={control}
+				id={"department"}
+			/>
+			<FieldSpan />
+			<InputLabel>Course Name</InputLabel>
+			<Input
+				placeholder={"Course Name"}
+				type="text"
+				name="CourseName"
+				ref={register({ required: true, max: 50 })}
+			/>
+			<FieldSpan />
+			<InputLabel>Description</InputLabel>
+			<TextBox
+				name="Description"
+				placeholder={"Course Description"}
+				rows={5}
+				ref={register({ required: true, max: 100 })}
+			/>
+			<FieldSpan />
+			<InputLabel>Days Scheduled</InputLabel>
+			{generateCheckBoxes()}
 		</FormContainer>
 	);
 };

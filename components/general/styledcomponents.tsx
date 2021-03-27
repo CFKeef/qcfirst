@@ -100,6 +100,34 @@ export const Input = styled.input<{ topSpace?: boolean }>`
 	}
 `;
 
+export const TextBox = styled.textarea`
+	background-color: var(--bg);
+	border: 1px solid var(--accent2);
+	border-radius: var(--border-radius);
+	color: var(--fg);
+
+	display: inline-flex;
+	padding: var(--halfgap);
+	transition: fill 0.15s ease;
+	width: 100%;
+	box-sizing: border-box;
+	justify-content: flex-start;
+	align-items: center;
+	resize: none;
+	&:focus {
+		border-radius: var(--border-radius);
+		border: 1px solid var(--accent5);
+		outline: none;
+
+		& + svg {
+			transition: fill 0.15s ease;
+			path {
+				fill: var(--accent5);
+			}
+		}
+	}
+`;
+
 export const IconInput = styled(Input)`
 	padding: 0 var(--halfgap) 0 var(--doublegap);
 `;

@@ -3,6 +3,7 @@ import { Controller, Control } from "react-hook-form";
 import Select from "react-select";
 import { InputLabel } from "../../general/styledcomponents";
 import styled from "styled-components";
+import { useTheme } from "next-themes";
 
 const DropDownContainer = styled.div`
 	display: flex;
@@ -25,21 +26,54 @@ interface DropDownProps {
 	fieldName: string;
 	data: Option[];
 	control: Control;
+	id: string;
 }
+const CustomSelect = styled(Select)`
+	.Select__control {
+		background-color: var(--bg);
+		border: var(--accent2) 1px solid;
+	}
+	.Select__single-value {
+		color: var(--fg);
+	}
+	.Select__menu {
+		background-color: var(--bg);
+		border: var(--accent2) 1px solid;
+		color: var(--fg);
+
+		.Select__menu-list {
+			.Select__option {
+				&:hover {
+					background-color: var(--fg);
+					color: var(--bg);
+					cursor: pointer;
+				}
+			}
+			.Select__option--is-selected {
+				background-color: var(--fg);
+				color: var(--bg);
+			}
+		}
+	}
+`;
 
 const DropDown: React.FunctionComponent<DropDownProps> = ({
 	fieldName,
 	data,
 	control,
+	id,
 }) => {
+	const drop = <CustomSelect classNamePrefix={"Select"} instanceId={id} />;
+
 	return (
 		<DropDownContainer>
 			<InputLabel>{fieldName}</InputLabel>
 			<Controller
-				as={Select}
+				as={drop}
 				name={fieldName}
 				options={data}
 				control={control}
+				defaultValue={data[0]}
 			/>
 		</DropDownContainer>
 	);
