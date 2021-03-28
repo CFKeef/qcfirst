@@ -32,6 +32,37 @@ const CustomSelect = styled(Select)`
 	.Select__control {
 		background-color: var(--bg);
 		border: var(--accent2) 1px solid;
+		box-shadow: none;
+		outline: none;
+		&:hover {
+			border-color: var(--fg);
+
+			.Select__indicators {
+				svg {
+					color: var(--fg);
+				}
+			}
+		}
+
+		.Select__indicators {
+			transition: all 0.3s ease;
+			transform: rotate(180deg);
+
+			svg {
+				color: var(--accent2);
+			}
+		}
+	}
+	.Select__indicator-separator {
+		display: none;
+	}
+
+	.Select__control--menu-is-open > .Select__indicators {
+		transition: all 0.3s ease;
+		transform: rotate(0deg);
+		svg {
+			color: var(--fg);
+		}
 	}
 	.Select__single-value {
 		color: var(--fg);

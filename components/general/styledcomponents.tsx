@@ -60,7 +60,7 @@ export const SubHeader = styled.h2`
 `;
 
 export const InputLabel = styled.label<{ topSpace?: boolean }>`
-	font-size: 1rem;
+	font-size: 0.8rem;
 	color: var(--accent5);
 	text-transform: uppercase;
 	margin-bottom: var(--halfgap);

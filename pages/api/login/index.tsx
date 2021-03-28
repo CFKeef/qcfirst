@@ -34,7 +34,8 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 				);
 				if (match) {
 					req.session.set("user", {
-						id: student.studentID,
+						id: student.id,
+						studentId: student.studentID,
 						email: student.email,
 						firstName: student.firstName,
 						lastName: student.lastName,
@@ -68,6 +69,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 				if (match) {
 					req.session.set("user", {
 						email: teacher.email,
+						id: teacher.id,
 						firstName: teacher.firstName,
 						lastName: teacher.lastName,
 						isStudent: false,

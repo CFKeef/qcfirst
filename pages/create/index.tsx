@@ -47,7 +47,7 @@ const Create: React.FunctionComponent<SessionUserProps> = ({
 				<PositionContainer>
 					<Container>
 						<PageTitleText>Create your course</PageTitleText>
-						<Form />
+						<Form userID={user.id} />
 					</Container>
 				</PositionContainer>
 			</SPAContentContainer>

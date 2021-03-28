@@ -5,6 +5,7 @@ import DropDown from "../general/input/dropdown";
 import { Button, InputLabel, TextBox } from "../general/styledcomponents";
 import { days, departments, semesters } from "./data/data";
 import { Input } from "../general/styledcomponents";
+import axios from "axios";
 
 type ClassForm = {
 	CourseName: string;
@@ -66,15 +67,24 @@ const InlineFieldGroup = styled.div`
 	width: 100%;
 `;
 
-const Form = () => {
+interface FormProps {
+	userID: number;
+}
+
+const Form: React.FunctionComponent<FormProps> = ({ userID }) => {
+	const [loading, setLoading] = useState(false);
+
 	const { register, handleSubmit, control } = useForm({
 		defaultValues: {
 			Capacity: 30,
 		},
 	});
 
-	const onSubmit = (data: ClassForm) => {
-		console.log(data);
+	const onSubmit = async (data: ClassForm) => {
+		setLoading(true);
+		await axios.post("/api/create", { data, userID }).then((res) => {
+			console.log(res);
+		});
 	};
 
 	const generateCheckBoxes = () => {
