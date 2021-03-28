@@ -1,12 +1,10 @@
-import React from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { useFieldArray, useForm, Controller } from "react-hook-form";
+import styled, { keyframes } from "styled-components";
 import DropDown from "../general/input/dropdown";
-import { InputLabel, TextBox } from "../general/styledcomponents";
+import { Button, InputLabel, TextBox } from "../general/styledcomponents";
 import { days, departments, semesters } from "./data/data";
 import { Input } from "../general/styledcomponents";
-import Checkbox from "../general/input/checkbox";
-import { SelectItem } from "../general/input/Checkboxlist";
 
 type ClassForm = {
 	CourseName: string;
@@ -15,19 +13,25 @@ type ClassForm = {
 	startTime: string;
 	endTime: string;
 	Semester: string;
-	Days: SelectModel[] | undefined;
+	SundayFlag: boolean;
+	MondayFlag: boolean;
+	TuesdayFlag: boolean;
+	WednesdayFlag: boolean;
+	ThursdayFlag: boolean;
+	FridayFlag: boolean;
+	SaturdayFlag: boolean;
+	Capacity: number;
+	StartTime: string;
+	EndTime: string;
 };
 
-interface SelectModel {
-	days: SelectItem[];
-}
-const FormContainer = styled.section`
+const FormContainer = styled.form`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	width: 45%;
-	padding: 2rem 1rem;
+	padding: 1rem;
 	border: 1px solid var(--accent3);
 `;
 
@@ -35,59 +39,67 @@ const FieldSpan = styled.br`
 	margin: 0.5rem 0;
 `;
 
+const CheckboxGroup = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: column;
+	flex: 0 20%;
+	margin: 0.5rem;
+`;
+
+const CheckBoxList = styled.fieldset`
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	flex-direction: row;
+	width: 100%;
+	flex-wrap: wrap;
+	border: none;
+`;
+
+const InlineFieldGroup = styled.div`
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-direction: column;
+	width: 100%;
+`;
+
 const Form = () => {
-	const { register, handleSubmit, control, getValues, setValue } = useForm({
+	const { register, handleSubmit, control } = useForm({
 		defaultValues: {
-			days: {
-				selected: [
-					{
-						days: days.map((day) => {
-							return {
-								id: day.value,
-								name: day.label,
-								selected: day.selected,
-							};
-						}),
-					},
-				],
-			},
+			Capacity: 30,
 		},
 	});
 
-	const { fields, append } = useFieldArray({
-		control,
-		name: "days.selected",
-	});
-
-	const addToArrayField = () => {
-		append({});
-	};
-
 	const onSubmit = (data: ClassForm) => {
-		console.log(JSON.stringify(data));
+		console.log(data);
 	};
 
 	const generateCheckBoxes = () => {
-		console.log(getValues("Days"));
 		return (
-			<ul>
-				{days.map((element) => {
+			<CheckBoxList>
+				{days.map((day) => {
 					return (
-						<li key={element.label}>
+						<CheckboxGroup key={day.key}>
+							<InputLabel style={{ textAlign: "center" }}>
+								{day.label}
+							</InputLabel>
 							<input
-								type={"checkbox"}
-								name={"Days"}
-								value={element.selected}
+								type="checkbox"
+								name={day.label + "Flag"}
+								ref={register}
 							/>
-						</li>
+						</CheckboxGroup>
 					);
 				})}
-			</ul>
+			</CheckBoxList>
 		);
 	};
 
 	return (
-		<FormContainer>
+		<FormContainer onSubmit={handleSubmit(onSubmit)}>
 			<DropDown
 				fieldName="Semester"
 				data={semesters}
@@ -118,8 +130,29 @@ const Form = () => {
 				ref={register({ required: true, max: 100 })}
 			/>
 			<FieldSpan />
+			<InlineFieldGroup>
+				<InputLabel>Capacity</InputLabel>
+				<Input name="Capacity" type={"number"} ref={register} />
+			</InlineFieldGroup>
+			<FieldSpan />
+			<InputLabel>Start Time</InputLabel>
+			<Input
+				name="StartTime"
+				type={"time"}
+				ref={register({ required: true })}
+			/>
+			<FieldSpan />
+			<InputLabel>End Time</InputLabel>
+			<Input
+				name="EndTime"
+				type={"time"}
+				ref={register({ required: true })}
+			/>
+			<FieldSpan />
 			<InputLabel>Days Scheduled</InputLabel>
 			{generateCheckBoxes()}
+			<FieldSpan />
+			<Button type="submit">Submit</Button>
 		</FormContainer>
 	);
 };
