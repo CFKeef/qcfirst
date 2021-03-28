@@ -33,7 +33,7 @@ export const BorderedContainer = styled(Container)`
 export const ColumnContainer = styled.div`
 	display: flex;
 	justify-content: flex-start;
-	align-items: flex-start;
+	align-items: center;
 	flex-direction: column;
 	width: 100%;
 `;
@@ -158,6 +158,12 @@ export const Button = styled.button<{ topSpace?: boolean }>`
 	}
 `;
 
+export const SlimButton = styled(Button)`
+	height: 1.5rem;
+	font-size: 0.9rem;
+	font-weight: normal;
+`;
+
 export const ParagraphText = styled.span`
 	margin: 0;
 	padding: 0;
@@ -225,3 +231,21 @@ export const LogoButton = styled(ResetButton)`
 `;
 
 export const LogoContainer = styled.div<{ theme: string }>``;
+
+export const ComponentPage = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const ComponentContainer = styled.section`
+	margin: 0 20px;
+	width: calc(100%-40px);
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-direction: column;
+	max-width: 1100px;
+	width: 100%;
+`;

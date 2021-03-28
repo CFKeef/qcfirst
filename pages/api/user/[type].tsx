@@ -3,30 +3,31 @@ import { NextApiResponse } from "next";
 import { AuthorizedRequest } from "../../../types/util";
 import withSession from "../../../util/session";
 import prisma from "../../../util/prisma";
-import { Instructor } from "@prisma/client";
 
 const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 	async (req, res) => {
 		const { type } = req.query;
-		let data;
+		let user;
 
 		if (type === "instructor") {
-			const user = await prisma.instructor.findUnique({
+			user = await prisma.instructor.findUnique({
 				where: {
 					id: parseInt(req.body.id),
 				},
-			});
-
-			if (user)
-				data = await prisma.course.findMany({
-					where: {
-						instructorId: user.id,
+				include: {
+					coursesTeaching: {
+						include: {
+							enrolled: true,
+						},
 					},
-				});
+				},
+			});
 		}
 
-		if (data) {
-			res.status(200).send(data);
+		if (user) {
+			res.status(200).send(user.coursesTeaching);
+		} else {
+			res.status(500).send("ERROR");
 		}
 	}
 );

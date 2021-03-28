@@ -9,32 +9,28 @@ import Nav from "../../components/dashboard/nav";
 import Hero from "../../components/dashboard/hero";
 import { QueryCache, QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import ContentBlock from "../../components/dashboard/contentblock";
 
 export interface SessionUserProps {
 	user: Student | Instructor;
 	isStudent: boolean;
 }
 
-const fetchStudentCourses = async (id: number) => {
-	const data = await axios.post("/api/user/student", { id: id });
+export const fetchStudentCourses = async (id: number) => {
+	const { data } = await axios.post("/api/user/student", { id: id });
 	return data;
 };
 
-const fetchInstructorCourses = async (id: number) => {
-	const data = await axios.post("/api/user/instructor", { id: id });
-	return data.data;
+export const fetchInstructorCourses = async (id: number) => {
+	const { data } = await axios.post("/api/user/instructor", { id: id });
+	return data;
 };
 
 const Dashboard: React.FunctionComponent<SessionUserProps> = ({
 	user,
 	isStudent,
 }) => {
-	const router = useRouter();
-	const { status, data, error, isFetching } = useQuery("data", () =>
-		fetchInstructorCourses(user.id)
-	);
-
 	return (
 		<Page>
 			<Head>
@@ -43,11 +39,7 @@ const Dashboard: React.FunctionComponent<SessionUserProps> = ({
 			<SPAContentContainer>
 				<Nav user={user} isStudent={isStudent} />
 				<Hero user={user} isStudent={isStudent} />
-				<div>
-					{data?.map((element) => {
-						return <p>{element.name}</p>;
-					})}
-				</div>
+				<ContentBlock user={user} isStudent={isStudent} />
 			</SPAContentContainer>
 		</Page>
 	);
@@ -67,21 +59,10 @@ export const getServerSideProps = withSession(async ({ req, res }) => {
 			},
 		};
 	} else {
-		const queryClient = new QueryClient();
-		if (user.isStudent) {
-			await queryClient.prefetchQuery("courses", () =>
-				fetchStudentCourses(user.id)
-			);
-		} else {
-			await queryClient.prefetchQuery("course", () =>
-				fetchInstructorCourses(user.id)
-			);
-		}
 		return {
 			props: {
 				user: user,
 				isStudent: user.isStudent,
-				dehydrated: dehydrate(queryClient),
 			},
 		};
 	}

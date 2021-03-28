@@ -1,4 +1,5 @@
 import { Instructor, Student } from "@prisma/client";
+import { assert } from "console";
 import React from "react";
 import styled from "styled-components";
 import { SessionUserProps } from "../../pages/dashboard";
@@ -44,6 +45,7 @@ const Hero: React.FunctionComponent<SessionUserProps> = ({
 }) => {
 	const generateID = () => {
 		if (isStudent) {
+			//@ts-ignore
 			return <IDText>#{user.studentID}</IDText>;
 		}
 	};
@@ -51,7 +53,6 @@ const Hero: React.FunctionComponent<SessionUserProps> = ({
 		<Page>
 			<Container>
 				<GreetingText>Hello,</GreetingText>
-				{console.log(user)}
 				<NameText>{user.firstName + " " + user.lastName}</NameText>
 				{generateID()}
 			</Container>

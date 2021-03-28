@@ -9,6 +9,19 @@ const handler = nc<
 >().post(async (req, res) => {
     const data = req.body.data;
 
+    const processFlags = () => {
+        return [
+            data.SundayFlag,
+            data.MondayFlag,
+            data.TuesdayFlag,
+            data.WednesdayFlag,
+            data.ThursdayFlag,
+            data.FridayFlag,
+            data.SaturdayFlag
+        ]
+    }
+    
+
     const course = await prisma.course.create({
         data: {
             semester: data.Semester.value,
@@ -17,6 +30,9 @@ const handler = nc<
             capacity: parseInt(data.Capacity),
             description: data.Description,
             deadline: new Date().toISOString(),
+            startTime: data.StartTime,
+            endTime: data.EndTime,
+            daysScheduled: processFlags(),
             instructor: {
                 connect: {
                     id: req.body.userID
@@ -29,7 +45,7 @@ const handler = nc<
         )
     }).finally(() => prisma.$disconnect)
 
-    if(course) res.status(200).send("Done!");
+    if(course) res.status(200).send({success: "Done!"});
 });
 
 export default withSession(handler as any);

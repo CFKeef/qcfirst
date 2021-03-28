@@ -163,7 +163,6 @@ const Nav: React.FunctionComponent<SessionUserProps> = ({
 						const selected =
 							element.route ===
 							"/" + router.pathname.split("/")[1];
-						console.log(router.pathname);
 						return (
 							<MenuOption
 								key={element.value + index}

@@ -15,7 +15,7 @@ model Student {
   lastName        String   @db.VarChar(50)
   password        String   @db.VarChar(100)
   authenticated   Boolean  @default(false)
-  coursesEnrolled Course[]
+  coursesEnrolled Course[] @relation(references: [id])
 }
 
 model Instructor {
@@ -29,15 +29,18 @@ model Instructor {
 }
 
 model Course {
-  id           Int        @id @default(autoincrement())
-  semester     String     @db.VarChar(20)
-  name         String     @db.VarChar(50)
-  department   String     @db.VarChar(20)
-  status       Int        @default(0)
-  capacity     Int
-  description  String     @db.VarChar(100)
-  deadline     DateTime
-  instructorId Int
-  instructor   Instructor @relation(fields: [instructorId], references: [id])
-  enrolled     Student[]
+  id            Int        @id @default(autoincrement())
+  semester      String     @db.VarChar(20)
+  name          String     @db.VarChar(50)
+  department    String     @db.VarChar(20)
+  status        Int        @default(0)
+  capacity      Int
+  description   String     @db.VarChar(100)
+  deadline      DateTime
+  startTime     String
+  endTime       String
+  daysScheduled Boolean[]
+  instructor    Instructor @relation(references: [id], fields: [instructorId])
+  enrolled      Student[]  @relation(references: [id])
+  instructorId  Int
 }
