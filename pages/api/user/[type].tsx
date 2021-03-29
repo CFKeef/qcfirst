@@ -22,10 +22,23 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 					},
 				},
 			});
-		}
-
-		if (user) {
-			res.status(200).send(user.coursesTeaching);
+			if (user) res.status(200).send(user.coursesTeaching);
+			else res.status(500).send("ERROR");
+		} else if (type === "student") {
+			user = await prisma.student.findUnique({
+				where: {
+					id: parseInt(req.body.id),
+				},
+				include: {
+					coursesEnrolled: {
+						include: {
+							instructor: true,
+						},
+					},
+				},
+			});
+			if (user) res.status(200).send(user.coursesEnrolled);
+			else res.status(500).send("ERROR");
 		} else {
 			res.status(500).send("ERROR");
 		}

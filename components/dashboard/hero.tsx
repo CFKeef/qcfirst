@@ -46,7 +46,7 @@ const Hero: React.FunctionComponent<SessionUserProps> = ({
 	const generateID = () => {
 		if (isStudent) {
 			//@ts-ignore
-			return <IDText>#{user.studentID}</IDText>;
+			return <IDText>#{user.studentId}</IDText>;
 		}
 	};
 	return (

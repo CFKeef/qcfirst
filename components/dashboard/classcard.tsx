@@ -24,6 +24,10 @@ const PosRow = styled.div`
 	width: 100%;
 	height: 100%;
 	padding: 1rem;
+
+	@media (max-width: 30em) {
+		padding: 0.5rem;
+	}
 `;
 const InfoColumn = styled.div`
 	display: flex;
@@ -50,6 +54,7 @@ const LightText = styled(ParagraphText)`
 `;
 const DetailText = styled(ParagraphText)`
 	font-size: 0.9rem;
+	width: 90%;
 `;
 const DeptText = styled(DetailText)`
 	font-weight: bold;
@@ -94,8 +99,7 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({ course }) => {
 					</DeptText>
 					<DetailText>{course.name}</DetailText>
 					<BottomText>
-						Currently Enrolled: {course.enrolled.length} /{" "}
-						{course.capacity}
+						{course.enrolled.length} / {course.capacity} Enrolled
 					</BottomText>
 				</InfoColumn>
 				<InfoColumn>

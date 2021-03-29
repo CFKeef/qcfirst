@@ -6,6 +6,7 @@ import { Button, InputLabel, TextBox } from "../general/styledcomponents";
 import { days, departments, semesters } from "./data/data";
 import { Input } from "../general/styledcomponents";
 import axios from "axios";
+import Multicheckbox from "../general/input/multicheckbox";
 
 type ClassForm = {
 	CourseName: string;
@@ -24,6 +25,7 @@ type ClassForm = {
 	Capacity: number;
 	StartTime: string;
 	EndTime: string;
+	Scheduled: { value: string; label: string }[];
 };
 
 const FormContainer = styled.form`
@@ -34,6 +36,11 @@ const FormContainer = styled.form`
 	width: 45%;
 	padding: 1rem;
 	border: 1px solid var(--accent3);
+	margin-bottom: 2rem;
+
+	@media (max-width: 30em) {
+		width: calc(100% - 40px);
+	}
 `;
 
 const FieldSpan = styled.br`
@@ -159,8 +166,15 @@ const Form: React.FunctionComponent<FormProps> = ({ userID }) => {
 				ref={register({ required: true })}
 			/>
 			<FieldSpan />
-			<InputLabel>Days Scheduled</InputLabel>
-			{generateCheckBoxes()}
+			<Multicheckbox
+				fieldName={"Scheduled"}
+				data={days.map((day) => {
+					return { label: day.label, value: day.key };
+				})}
+				control={control}
+				id={"day"}
+				register={register}
+			/>
 			<FieldSpan />
 			<Button type="submit">Submit</Button>
 		</FormContainer>

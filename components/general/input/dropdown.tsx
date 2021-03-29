@@ -3,9 +3,8 @@ import { Controller, Control } from "react-hook-form";
 import Select from "react-select";
 import { InputLabel } from "../../general/styledcomponents";
 import styled from "styled-components";
-import { useTheme } from "next-themes";
 
-const DropDownContainer = styled.div`
+export const DropDownContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
@@ -17,18 +16,18 @@ const DropDownContainer = styled.div`
 	}
 `;
 
-type Option = {
+export type Option = {
 	value: string;
 	label: string;
 };
 
-interface DropDownProps {
+export interface DropDownProps {
 	fieldName: string;
 	data: Option[];
 	control: Control;
 	id: string;
 }
-const CustomSelect = styled(Select)`
+export const CustomSelect = styled(Select)`
 	.Select__control {
 		background-color: var(--bg);
 		border: var(--accent2) 1px solid;
@@ -44,7 +43,7 @@ const CustomSelect = styled(Select)`
 			}
 		}
 
-		.Select__indicators {
+		.Select__indicators .Select__dropdown-indicator {
 			transition: all 0.3s ease;
 			transform: rotate(180deg);
 
@@ -57,7 +56,9 @@ const CustomSelect = styled(Select)`
 		display: none;
 	}
 
-	.Select__control--menu-is-open > .Select__indicators {
+	.Select__control--menu-is-open
+		> .Select__indicators
+		> .Select__dropdown-indicator {
 		transition: all 0.3s ease;
 		transform: rotate(0deg);
 		svg {

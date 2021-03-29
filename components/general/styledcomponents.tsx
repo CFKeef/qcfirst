@@ -169,6 +169,9 @@ export const ParagraphText = styled.span`
 	padding: 0;
 	color: var(--fg);
 	font-size: 1rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 `;
 
 export const TextLinkAnchor = styled.a`
