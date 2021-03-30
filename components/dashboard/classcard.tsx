@@ -69,8 +69,8 @@ const Spacer = styled.br`
 const ClassCard: React.FunctionComponent<ClassCardProps> = ({ course }) => {
 	const formatDaysString = () => {
 		let str: string = "";
-		// @ts-ignore
-		course.daysScheduled.map((flag, index) => {
+
+		course?.daysScheduled.map((flag, index) => {
 			if (flag) {
 				str += days[index].key;
 			}
