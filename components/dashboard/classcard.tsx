@@ -8,7 +8,7 @@ export interface CourseResponse extends Course {
 	enrolled: Course[];
 }
 interface ClassCardProps {
-	course: CourseResponse;
+	course: Course;
 }
 const CardListItem = styled.li`
 	border: 1px solid var(--accent3);
@@ -78,6 +78,7 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({ course }) => {
 
 		return str;
 	};
+
 	return (
 		<CardListItem>
 			<PosRow>
