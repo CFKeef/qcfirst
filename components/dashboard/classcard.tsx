@@ -8,7 +8,7 @@ export interface CourseResponse extends Course {
 	enrolled: Course[];
 }
 interface ClassCardProps {
-	course: Course;
+	course: CourseResponse;
 }
 const CardListItem = styled.li`
 	border: 1px solid var(--accent3);
@@ -69,7 +69,7 @@ const Spacer = styled.br`
 const ClassCard: React.FunctionComponent<ClassCardProps> = ({ course }) => {
 	const formatDaysString = () => {
 		let str: string = "";
-
+		// @ts-ignore
 		course?.daysScheduled.map((flag, index) => {
 			if (flag) {
 				str += days[index].key;
@@ -100,7 +100,8 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({ course }) => {
 					</DeptText>
 					<DetailText>{course.name}</DetailText>
 					<BottomText>
-						{course.enrolled.length} / {course.capacity} Enrolled
+						{/** @ts--ignore */}
+						{course?.enrolled.length} / {course.capacity} Enrolled
 					</BottomText>
 				</InfoColumn>
 				<InfoColumn>
