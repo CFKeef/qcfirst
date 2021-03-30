@@ -1,15 +1,9 @@
 import Link from "next/link";
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import styled from "styled-components";
-import {
-	LogoContainer,
-	ParagraphText,
-	ResetButton,
-} from "../general/styledcomponents";
+import { ResetButton } from "../general/styledcomponents";
 import { useRouter } from "next/router";
-import LogoHeader from "../general/LogoHeader";
 import axios from "axios";
-import { Instructor, Student } from "@prisma/client";
 import { SessionUserProps } from "../../pages/dashboard";
 
 type menuTab = {
@@ -133,10 +127,7 @@ const LogoText = styled.h1`
 	margin: 0.5rem 0;
 `;
 
-const Nav: React.FunctionComponent<SessionUserProps> = ({
-	user,
-	isStudent,
-}) => {
+const Nav: React.FunctionComponent<SessionUserProps> = ({ isStudent }) => {
 	const router = useRouter();
 	/**
 	 * Generates the menu component which includes the Nav and the Logo

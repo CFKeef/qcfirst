@@ -14,7 +14,7 @@ const handleColorType = (type: String) => {
 	}
 };
 
-const NoteWrapper = styled.div<{ type: String }>`
+const NoteWrapper = styled.div<{ type: string }>`
 	background-color: ${({ type }) => handleColorType(type)};
 	height: 2.5rem;
 	width: 100%;

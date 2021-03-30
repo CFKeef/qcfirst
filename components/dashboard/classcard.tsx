@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 // Will fix this later having an issue with inheritance
 import { Course } from "@prisma/client";
@@ -70,7 +71,8 @@ const Spacer = styled.br`
 
 const ClassCard: React.FunctionComponent<ClassCardProps> = ({ course }) => {
 	const formatDaysString = () => {
-		let str: string = "";
+		let str = "";
+
 		course?.daysScheduled.map((flag, index) => {
 			if (flag) {
 				str += days[index].key;

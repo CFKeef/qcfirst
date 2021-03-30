@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useFieldArray, useForm, Controller } from "react-hook-form";
-import styled, { keyframes } from "styled-components";
+import { useForm } from "react-hook-form";
+import styled from "styled-components";
 import DropDown from "../general/input/dropdown";
 import { Button, InputLabel, TextBox } from "../general/styledcomponents";
 import { days, departments, semesters } from "./data/data";
@@ -92,27 +92,6 @@ const Form: React.FunctionComponent<FormProps> = ({ userID }) => {
 		await axios.post("/api/create", { data, userID }).then((res) => {
 			console.log(res);
 		});
-	};
-
-	const generateCheckBoxes = () => {
-		return (
-			<CheckBoxList>
-				{days.map((day) => {
-					return (
-						<CheckboxGroup key={day.key}>
-							<InputLabel style={{ textAlign: "center" }}>
-								{day.label}
-							</InputLabel>
-							<input
-								type="checkbox"
-								name={day.label + "Flag"}
-								ref={register}
-							/>
-						</CheckboxGroup>
-					);
-				})}
-			</CheckBoxList>
-		);
 	};
 
 	return (

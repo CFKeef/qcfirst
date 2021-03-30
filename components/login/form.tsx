@@ -62,6 +62,7 @@ const Form: React.FunctionComponent = () => {
 			})
 			.catch((err) => {
 				setError(true);
+				console.log(err);
 			});
 	};
 

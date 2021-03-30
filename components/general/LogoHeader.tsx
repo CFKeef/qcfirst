@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Logo from "../../public/images/coursorLogo.png";
-import { LogoContainer, LogoButton } from "../general/styledcomponents";
-import { useTheme } from "next-themes";
+import { LogoContainer } from "../general/styledcomponents";
 
 const LogoHeader = () => {
 	return (

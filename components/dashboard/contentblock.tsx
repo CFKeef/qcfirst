@@ -1,7 +1,6 @@
-import { Course, Instructor, Student } from "@prisma/client";
 import React from "react";
 import styled from "styled-components";
-import axios from "axios";
+
 import { useQuery } from "react-query";
 import {
 	fetchStudentCourses,
@@ -13,7 +12,6 @@ import {
 	ComponentContainer,
 	ComponentPage,
 	Header,
-	ParagraphText,
 } from "../general/styledcomponents";
 import ClassCard, { CourseResponse } from "./classcard";
 
@@ -31,7 +29,7 @@ const ContentBlock: React.FunctionComponent<SessionUserProps> = ({
 	user,
 	isStudent,
 }) => {
-	const { status, data, error, isFetching } = useQuery("course", async () => {
+	const { data, isFetching } = useQuery("course", async () => {
 		if (isStudent) {
 			return await fetchStudentCourses(user.id);
 		} else return await fetchInstructorCourses(user.id);
@@ -76,17 +74,6 @@ const ContentBlock: React.FunctionComponent<SessionUserProps> = ({
 			<ComponentContainer>{data && dataContent()}</ComponentContainer>
 		</ComponentPage>
 	);
-	// return (
-	// 	<section>
-	// 		{data.map((element: Course) => {
-	// 			return (
-	// 				<ParagraphText key={element.id}>
-	// 					{element.name}
-	// 				</ParagraphText>
-	// 			);
-	// 		})}
-	// 	</section>
-	// );
 };
 
 export default ContentBlock;
