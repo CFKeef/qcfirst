@@ -8,7 +8,7 @@ import {
 	AnchorText,
 	TextLinkAnchor,
 } from "../general/styledcomponents";
-import { IoMail, IoKey } from "react-icons/io5";
+import { IoMail } from "react-icons/io5";
 import styled from "styled-components";
 import Link from "next/link";
 
@@ -21,8 +21,8 @@ const IconInputContainer = styled.div`
 `;
 
 const Form: React.FunctionComponent = () => {
-	const { register, handleSubmit, errors } = useForm<FormData>();
-	const onSubmit = (data: FormData) => console.log("recover");
+	const { register, handleSubmit } = useForm<FormData>();
+	const onSubmit = (data: FormData) => console.log(data);
 
 	return (
 		<Container style={{ margin: "2rem 0" }}>

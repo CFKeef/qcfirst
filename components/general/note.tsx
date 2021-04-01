@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 
-const handleColorType = (type: String) => {
+const handleColorType = (type: string) => {
 	switch (type) {
 		case "Error":
 			return "var(--error)";
@@ -34,7 +34,7 @@ const NoteHeader = styled.span`
 
 interface NoteProps {
 	type: "Error" | "Success" | "Warning" | "";
-	message: String;
+	message: string;
 }
 
 const Note: React.FunctionComponent<NoteProps> = ({

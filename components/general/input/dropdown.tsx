@@ -17,7 +17,7 @@ export const DropDownContainer = styled.div`
 `;
 
 export type Option = {
-	value: string;
+	value: string | number;
 	label: string;
 };
 

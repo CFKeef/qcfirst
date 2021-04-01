@@ -8,27 +8,20 @@ import { Input } from "../general/styledcomponents";
 import axios from "axios";
 import Multicheckbox from "../general/input/multicheckbox";
 
-type ClassForm = {
+export type ClassForm = {
 	CourseName: string;
 	Department: string;
 	Description: string;
 	startTime: string;
 	endTime: string;
 	Semester: string;
-	SundayFlag: boolean;
-	MondayFlag: boolean;
-	TuesdayFlag: boolean;
-	WednesdayFlag: boolean;
-	ThursdayFlag: boolean;
-	FridayFlag: boolean;
-	SaturdayFlag: boolean;
 	Capacity: number;
 	StartTime: string;
 	EndTime: string;
 	Scheduled: { value: string; label: string }[];
 };
 
-const FormContainer = styled.form`
+export const FormContainer = styled.form`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -43,30 +36,11 @@ const FormContainer = styled.form`
 	}
 `;
 
-const FieldSpan = styled.br`
+export const FieldSpan = styled.br`
 	margin: 0.5rem 0;
 `;
 
-const CheckboxGroup = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	flex-direction: column;
-	flex: 0 20%;
-	margin: 0.5rem;
-`;
-
-const CheckBoxList = styled.fieldset`
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-	flex-direction: row;
-	width: 100%;
-	flex-wrap: wrap;
-	border: none;
-`;
-
-const InlineFieldGroup = styled.div`
+export const InlineFieldGroup = styled.div`
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
@@ -74,7 +48,7 @@ const InlineFieldGroup = styled.div`
 	width: 100%;
 `;
 
-interface FormProps {
+export interface FormProps {
 	userID: number;
 }
 
@@ -89,6 +63,7 @@ const Form: React.FunctionComponent<FormProps> = ({ userID }) => {
 
 	const onSubmit = async (data: ClassForm) => {
 		setLoading(true);
+
 		await axios.post("/api/create", { data, userID }).then((res) => {
 			console.log(res);
 		});
@@ -152,7 +127,6 @@ const Form: React.FunctionComponent<FormProps> = ({ userID }) => {
 				})}
 				control={control}
 				id={"day"}
-				register={register}
 			/>
 			<FieldSpan />
 			<Button type="submit">Submit</Button>

@@ -39,7 +39,7 @@ model Course {
   deadline      DateTime
   startTime     String
   endTime       String
-  daysScheduled Boolean[]
+  daysScheduled String
   instructor    Instructor @relation(references: [id], fields: [instructorId])
   enrolled      Student[]  @relation(references: [id])
   instructorId  Int

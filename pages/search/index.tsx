@@ -1,18 +1,70 @@
-import { Instructor, Student } from "@prisma/client";
+import { Course, Instructor, Student } from "@prisma/client";
 import Head from "next/head";
 
-import React from "react";
-import Hero from "../../components/dashboard/hero";
+import React, { useState } from "react";
+import ClassCard from "../../components/dashboard/classcard";
 import Nav from "../../components/dashboard/nav";
 import { SPAContentContainer } from "../../components/general/spa";
-import { Page } from "../../components/general/styledcomponents";
+import {
+	Button,
+	Page,
+	ParagraphText,
+} from "../../components/general/styledcomponents";
+import Form from "../../components/search/form";
 import withSession from "../../util/session";
+import {
+	PageTitleText,
+	PositionContainer,
+	ResponsiveContainer,
+} from "../create";
 import { SessionUserProps } from "../dashboard";
 
 const Search: React.FunctionComponent<SessionUserProps> = ({
 	user,
 	isStudent,
 }) => {
+	const [view, setView] = useState(false);
+	const [results, setResults] = useState<Course[] | null>([]);
+
+	const generateCards = () => {
+		return (
+			<ul>
+				{results?.map((result) => {
+					return (
+						<li key={result.id}>
+							<ParagraphText>{result.name}</ParagraphText>
+						</li>
+					);
+				})}
+			</ul>
+		);
+	};
+
+	const determineContent = () => {
+		if (view) {
+			return (
+				<ResponsiveContainer>
+					<PageTitleText>Search for a course</PageTitleText>
+					{generateCards()}
+				</ResponsiveContainer>
+			);
+		} else {
+			return (
+				<ResponsiveContainer>
+					<PageTitleText>Search for a course</PageTitleText>
+					<Form userID={user.id} setResults={setResults} />
+					<Button onClick={() => setView(true)}>
+						{results
+							? results.length > 0
+								? `View ${results.length} now`
+								: "Didn't find anything"
+							: null}
+					</Button>
+				</ResponsiveContainer>
+			);
+		}
+	};
+
 	return (
 		<Page>
 			<Head>
@@ -20,6 +72,7 @@ const Search: React.FunctionComponent<SessionUserProps> = ({
 			</Head>
 			<SPAContentContainer>
 				<Nav user={user} isStudent={isStudent} />
+				<PositionContainer>{determineContent()}</PositionContainer>
 			</SPAContentContainer>
 		</Page>
 	);

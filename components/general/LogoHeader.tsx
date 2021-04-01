@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../../public/images/coursorLogo.png";
 import { LogoContainer } from "../general/styledcomponents";
 
-const LogoHeader = () => {
+const LogoHeader: React.FunctionComponent = () => {
 	return (
 		<LogoContainer>
 			<img src={Logo} alt={"Image depicting coursor logo"} />

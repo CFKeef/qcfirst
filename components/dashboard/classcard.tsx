@@ -70,18 +70,6 @@ const Spacer = styled.br`
 `;
 
 const ClassCard: React.FunctionComponent<ClassCardProps> = ({ course }) => {
-	const formatDaysString = () => {
-		let str = "";
-
-		course?.daysScheduled.map((flag, index) => {
-			if (flag) {
-				str += days[index].key;
-			}
-		});
-
-		return str;
-	};
-
 	return (
 		<CardListItem>
 			<PosRow>
@@ -111,7 +99,7 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({ course }) => {
 					<DetailText>
 						{course.startTime}-{course.endTime}
 					</DetailText>
-					<DetailText>{formatDaysString()}</DetailText>
+					<DetailText>{course.daysScheduled}</DetailText>
 				</InfoColumn>
 				<ButtonColumn>
 					<SlimButton>View</SlimButton>

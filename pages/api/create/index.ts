@@ -3,6 +3,8 @@ import { NextApiResponse } from "next";
 import { AuthorizedRequest } from "../../../types/util";
 import withSession from "../../../util/session";
 import prisma from "../../../util/prisma";
+import {Option} from "../../create/data/data";
+
 const handler = nc<
 	AuthorizedRequest,
 	NextApiResponse
@@ -10,15 +12,9 @@ const handler = nc<
     const data = req.body.data;
 
     const processFlags = () => {
-        return [
-            data.SundayFlag,
-            data.MondayFlag,
-            data.TuesdayFlag,
-            data.WednesdayFlag,
-            data.ThursdayFlag,
-            data.FridayFlag,
-            data.SaturdayFlag
-        ]
+        let str = "";
+        data.Scheduled.map( (day:Option) => {str += day.value});
+        return str;
     }
     
 
@@ -48,4 +44,5 @@ const handler = nc<
     if(course) res.status(200).send({success: "Done!"});
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default withSession(handler as any);

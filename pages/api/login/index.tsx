@@ -35,7 +35,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 				if (match) {
 					req.session.set("user", {
 						id: student.id,
-						studentId: student.studentID,
+						studentID: student.studentID,
 						email: student.email,
 						firstName: student.firstName,
 						lastName: student.lastName,

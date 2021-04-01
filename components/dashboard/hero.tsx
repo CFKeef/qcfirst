@@ -44,6 +44,7 @@ const Hero: React.FunctionComponent<SessionUserProps> = ({
 }) => {
 	const generateID = () => {
 		if (isStudent) {
+			console.log(user);
 			const student = user as Student;
 			return <IDText>#{student.studentID}</IDText>;
 		}

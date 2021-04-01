@@ -29,3 +29,9 @@ export const days = [
     { key: "Fri", label: "Friday",selected:false},
     { key: "Sat", label: "Saturday",selected:false },
 ]
+
+export const statuses = [
+    {value: 0, label: "Open"},
+    {value: 1, label: "Waitlist"},
+    {value: 2, label: "Closed"}
+]

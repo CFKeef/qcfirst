@@ -29,7 +29,7 @@ const ContentBlock: React.FunctionComponent<SessionUserProps> = ({
 	user,
 	isStudent,
 }) => {
-	const { data, isFetching } = useQuery("course", async () => {
+	const { data, isLoading } = useQuery("course", async () => {
 		if (isStudent) {
 			return await fetchStudentCourses(user.id);
 		} else return await fetchInstructorCourses(user.id);
@@ -45,11 +45,11 @@ const ContentBlock: React.FunctionComponent<SessionUserProps> = ({
 		);
 	};
 
-	if (isFetching) {
+	if (isLoading) {
 		return (
 			<ComponentPage>
 				<ComponentContainer>
-					{isFetching && loadingContent()}
+					{isLoading && loadingContent()}
 				</ComponentContainer>
 			</ComponentPage>
 		);

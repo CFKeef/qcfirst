@@ -8,7 +8,7 @@ import { Page } from "../../components/general/styledcomponents";
 import withSession from "../../util/session";
 import { SessionUserProps } from "../dashboard";
 
-const Container = styled.section`
+export const ResponsiveContainer = styled.section`
 	margin: 0 20px;
 	width: calc(100%-40px);
 	display: flex;
@@ -18,7 +18,7 @@ const Container = styled.section`
 	max-width: 1100px;
 	width: 100%;
 `;
-const PositionContainer = styled.div`
+export const PositionContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -26,7 +26,7 @@ const PositionContainer = styled.div`
 	width: 100%;
 `;
 
-const PageTitleText = styled.h1`
+export const PageTitleText = styled.h1`
 	color: var(--fg);
 	text-align: center;
 	width: 100%;
@@ -45,10 +45,10 @@ const Create: React.FunctionComponent<SessionUserProps> = ({
 			<SPAContentContainer>
 				<Nav user={user} isStudent={isStudent} />
 				<PositionContainer>
-					<Container>
+					<ResponsiveContainer>
 						<PageTitleText>Create your course</PageTitleText>
 						<Form userID={user.id} />
-					</Container>
+					</ResponsiveContainer>
 				</PositionContainer>
 			</SPAContentContainer>
 		</Page>
@@ -57,7 +57,7 @@ const Create: React.FunctionComponent<SessionUserProps> = ({
 
 export default Create;
 
-export const getServerSideProps = withSession(async ({ req, res }) => {
+export const getServerSideProps = withSession(async ({ req }) => {
 	const user = req.session.get("user");
 
 	if (!user || user.isStudent) {
