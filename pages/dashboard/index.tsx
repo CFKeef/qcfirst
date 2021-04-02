@@ -7,9 +7,7 @@ import { SPAContentContainer } from "../../components/general/spa";
 import withSession from "../../util/session";
 import Nav from "../../components/dashboard/nav";
 import Hero from "../../components/dashboard/hero";
-import { QueryCache, QueryClient, useQuery } from "react-query";
-import { dehydrate } from "react-query/hydration";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import ContentBlock from "../../components/dashboard/contentblock";
 
 export interface SessionUserProps {
@@ -47,7 +45,7 @@ const Dashboard: React.FunctionComponent<SessionUserProps> = ({
 
 export default Dashboard;
 
-export const getServerSideProps = withSession(async ({ req, res }) => {
+export const getServerSideProps = withSession(async ({ req }) => {
 	const user = req.session.get("user");
 
 	if (!user) {

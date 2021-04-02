@@ -17,7 +17,14 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 				include: {
 					coursesTeaching: {
 						include: {
-							enrolled: true,
+							enrolled: {
+								select: {
+									id: true,
+									studentID: true,
+									firstName: true,
+									lastName: true,
+								},
+							},
 						},
 					},
 				},

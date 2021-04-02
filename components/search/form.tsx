@@ -27,11 +27,13 @@ export type SearchForm = {
 
 interface SearchFormProps extends FormProps {
 	setResults: React.Dispatch<React.SetStateAction<Course[] | null>>;
+	setSearched: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Form: React.FunctionComponent<SearchFormProps> = ({
 	userID,
 	setResults,
+	setSearched,
 }) => {
 	const { register, handleSubmit, control } = useForm();
 	const [err, setErr] = useState(false);
@@ -44,6 +46,7 @@ const Form: React.FunctionComponent<SearchFormProps> = ({
 			.catch((err) => {
 				if (err) setErr(err);
 			});
+		setSearched(true);
 	};
 
 	return (

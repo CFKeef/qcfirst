@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Head from "next/head";
 import Form from "../components/login/form";
 import {
@@ -10,7 +10,7 @@ import {
 import ThemeToggle from "../components/general/themetoggle";
 import withSession from "../util/session";
 
-export const getServerSideProps = withSession(async ({ req, res }) => {
+export const getServerSideProps = withSession(async ({ req }) => {
 	const user = req.session.get("user");
 
 	if (user) {

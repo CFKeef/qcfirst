@@ -15,7 +15,7 @@ import {
 } from "../general/styledcomponents";
 import ClassCard, { CourseResponse } from "./classcard";
 
-const DataContainer = styled.div`
+export const DataContainer = styled.div`
 	width: 50%;
 	border: 1px solid var(--accent2);
 	border-radius: var(--border-radius);

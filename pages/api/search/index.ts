@@ -34,10 +34,16 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
                 //}
             }, 
             include: {
-                enrolled: true
+                enrolled: true,
+                instructor: {
+                    select: {
+                        firstName: true,
+                        lastName: true
+                    }
+                }
             }
         })
-
+        console.log(result)
         if(result) res.status(200).send({courses: result});
         else res.status(500).send({"err": "Error with info provided"})
 	}

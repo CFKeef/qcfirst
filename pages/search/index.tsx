@@ -1,12 +1,17 @@
 import { Course, Instructor, Student } from "@prisma/client";
 import Head from "next/head";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { FieldSpan } from "../../components/create/form";
 import ClassCard from "../../components/dashboard/classcard";
+import { DataContainer } from "../../components/dashboard/contentblock";
 import Nav from "../../components/dashboard/nav";
+import Note from "../../components/general/note";
 import { SPAContentContainer } from "../../components/general/spa";
 import {
+	BorderedContainer,
 	Button,
+	Container,
 	Page,
 	ParagraphText,
 } from "../../components/general/styledcomponents";
@@ -23,46 +28,71 @@ const Search: React.FunctionComponent<SessionUserProps> = ({
 	user,
 	isStudent,
 }) => {
-	const [view, setView] = useState(false);
 	const [results, setResults] = useState<Course[] | null>([]);
-
-	const generateCards = () => {
-		return (
-			<ul>
-				{results?.map((result) => {
-					return (
-						<li key={result.id}>
-							<ParagraphText>{result.name}</ParagraphText>
-						</li>
-					);
-				})}
-			</ul>
-		);
-	};
+	const [searched, setSearched] = useState(false);
+	const [redirect, setRedirect] = useState(false);
 
 	const determineContent = () => {
-		if (view) {
+		const determineUserFeedback = () => {
+			if (searched) {
+				if (results) {
+					if (results.length > 0) {
+						setRedirect(true);
+					} else {
+						return (
+							<Note
+								type="Warning"
+								message="Did not find anything that matched the criteria"
+							/>
+						);
+					}
+				} else {
+					return <Note type="Error" message="Oh no it blew up :(" />;
+				}
+			}
+		};
+		const handleBackButton = () => {
+			setRedirect(false);
+			setSearched(false);
+		};
+
+		if (redirect) {
 			return (
 				<ResponsiveContainer>
-					<PageTitleText>Search for a course</PageTitleText>
-					{generateCards()}
-				</ResponsiveContainer>
-			);
-		} else {
-			return (
-				<ResponsiveContainer>
-					<PageTitleText>Search for a course</PageTitleText>
-					<Form userID={user.id} setResults={setResults} />
-					<Button onClick={() => setView(true)}>
-						{results
-							? results.length > 0
-								? `View ${results.length} now`
-								: "Didn't find anything"
-							: null}
-					</Button>
+					<PageTitleText>{`Showing ${results?.length} results`}</PageTitleText>
+					<DataContainer>
+						{results?.map((course) => {
+							return (
+								<ClassCard
+									key={course.id}
+									course={course}
+									view={"enroll"}
+									action={() => console.log("enrolled")}
+									userID={user.id}
+								/>
+							);
+						})}
+					</DataContainer>
+					<FieldSpan />
+					<Container>
+						<Button onClick={() => handleBackButton()}>
+							Back to Search
+						</Button>
+					</Container>
 				</ResponsiveContainer>
 			);
 		}
+		return (
+			<ResponsiveContainer>
+				<PageTitleText>Search for a course</PageTitleText>
+				<Form
+					userID={user.id}
+					setResults={setResults}
+					setSearched={setSearched}
+				/>
+				<Container>{determineUserFeedback()}</Container>
+			</ResponsiveContainer>
+		);
 	};
 
 	return (
@@ -80,7 +110,7 @@ const Search: React.FunctionComponent<SessionUserProps> = ({
 
 export default Search;
 
-export const getServerSideProps = withSession(async ({ req, res }) => {
+export const getServerSideProps = withSession(async ({ req }) => {
 	const user = req.session.get("user");
 
 	if (!user) {

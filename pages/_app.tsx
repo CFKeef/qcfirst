@@ -22,6 +22,7 @@ body {
 	--letter-spacing: .05REM;
 	--success: #0070F3;
 	--error: #F33;
+	--warning: #7928CA;
 	--small-button: 2REM;
 }
 

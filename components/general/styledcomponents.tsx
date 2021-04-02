@@ -159,9 +159,9 @@ export const Button = styled.button<{ topSpace?: boolean }>`
 `;
 
 export const SlimButton = styled(Button)`
-	height: 1.5rem;
+	height: 1.5rem !important;
 	font-size: 0.9rem;
-	font-weight: normal;
+	font-weight: normal !important;
 `;
 
 export const ParagraphText = styled.span`
