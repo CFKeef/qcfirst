@@ -19,7 +19,8 @@ const handler = nc<
         return str;
     }
     
-
+    const days = processFlags();
+    
     const course = await prisma.course.create({
         data: {
             semester: data.Semester.value,
@@ -30,7 +31,7 @@ const handler = nc<
             deadline: new Date().toISOString(),
             startTime: data.StartTime,
             endTime: data.EndTime,
-            daysScheduled: processFlags(),
+            daysScheduled: days,
             instructor: {
                 connect: {
                     id: req.body.userID
