@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import nc from "next-connect";
 import { NextApiResponse } from "next";
 import { AuthorizedRequest } from "../../../types/util";
 import withSession from "../../../util/session";
 import prisma from "../../../util/prisma";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
+// @ts-ignore
 import {Option} from "../../create/data/data";
 
 const handler = nc<
@@ -31,6 +32,7 @@ const handler = nc<
             deadline: new Date().toISOString(),
             startTime: data.StartTime,
             endTime: data.EndTime,
+            // @ts-ignore
             daysScheduled: days,
             instructor: {
                 connect: {

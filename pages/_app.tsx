@@ -63,7 +63,7 @@ body {
 }
 `;
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 	const queryClientRef = React.useRef();
 
 	if (!queryClientRef.current) {
