@@ -4,19 +4,10 @@ import { AuthorizedRequest } from "../../../types/util";
 import prisma from "../../../util/prisma";;
 import withSession from "../../../util/session";
 import { SearchForm } from "../../../components/search/form";
-import { Option } from "../../../components/create/data/data";
 
 interface SearchFormRequest extends SearchForm  {
     userID: number
 }
-
-const processScheduledString = (daysScheduled: Option[]) => {
-    let str = "";
-    daysScheduled.map((day:Option) => {
-        str += day.value;
-    })
-    return str;
-};
 
 const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 	async (req, res) => {
@@ -43,8 +34,8 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
                 }
             }
         })
-        if(result) res.status(200).send({courses: result});
-        else res.status(500).send({"err": "Error with info provided"})
+        if(result) res.send({courses: result});
+        else res.send({Error: "Error with info provided"})
 	}
 );
 

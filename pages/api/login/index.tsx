@@ -23,9 +23,8 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 					},
 				})
 				.catch((err) => {
-					res.status(500).end(err.name + ": Issue with Log in");
-				})
-				.finally(() => prisma.$disconnect);
+					res.send({ Error: `${err.name}` });
+				});
 
 			if (student) {
 				match = await comparePassToHash(
@@ -42,12 +41,12 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 						isStudent: true,
 					});
 					await req.session.save();
-					res.status(200).send("Logged in!");
+					res.send({ Success: "Logged in!" });
 				} else {
-					res.status(401).send("Error: Issue with Log in");
+					res.send({ Error: "Issue with details provided" });
 				}
 			} else {
-				res.status(401).send("Error: Issue with Log in");
+				res.send("Error: Not a user");
 			}
 		} else if (data.userType === "Teacher") {
 			const teacher = await prisma.instructor
@@ -57,9 +56,8 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 					},
 				})
 				.catch((err) => {
-					res.status(500).send(err.name + ": Issue with Log in");
-				})
-				.finally(() => prisma.$disconnect);
+					res.send({ Error: `${err.name}` });
+				});
 
 			if (teacher) {
 				match = await comparePassToHash(
@@ -75,12 +73,12 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 						isStudent: false,
 					});
 					await req.session.save();
-					res.status(200).send("Logged in!");
+					res.send({ Success: "Logged in!" });
 				} else {
-					res.status(401).send("Error: Issue with Log in");
+					res.send({ Error: "Issue with details provided" });
 				}
 			} else {
-				res.status(401).send("Error: Issue with Log in");
+				res.send({ Error: "Not Registered with us" });
 			}
 		}
 	}

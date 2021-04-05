@@ -1,7 +1,7 @@
-import { Course, Instructor, Student } from "@prisma/client";
+import { Course } from "@prisma/client";
 import Head from "next/head";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FieldSpan } from "../../components/create/form";
 import ClassCard from "../../components/dashboard/classcard";
 import { DataContainer } from "../../components/dashboard/contentblock";
@@ -9,11 +9,9 @@ import Nav from "../../components/dashboard/nav";
 import Note from "../../components/general/note";
 import { SPAContentContainer } from "../../components/general/spa";
 import {
-	BorderedContainer,
 	Button,
 	Container,
 	Page,
-	ParagraphText,
 } from "../../components/general/styledcomponents";
 import Form from "../../components/search/form";
 import withSession from "../../util/session";

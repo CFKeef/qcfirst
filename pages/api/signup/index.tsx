@@ -24,7 +24,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 					},
 				})
 				.catch((e: Error) => {
-					res.status(500).send(e.name + ": Issue with creation");
+					res.send({ Error: `${e.name}` });
 				})
 				.finally(() => prisma.$disconnect);
 		} else if (data.userType === "Teacher") {
@@ -38,16 +38,14 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 					},
 				})
 				.catch((e: Error) => {
-					res.status(500).send(
-						e.name + ": Issue with Teacher creation"
-					);
+					res.send({ Error: `${e.name}` });
 				})
 				.finally(() => prisma.$disconnect);
 		} else {
-			res.status(500).send("Issue with Usertype creation");
+			res.send("Issue with Usertype creation");
 		}
 
-		if (user) res.status(200).send("Signed up!");
+		if (user) res.send("Signed up!");
 	}
 );
 

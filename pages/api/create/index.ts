@@ -41,12 +41,12 @@ const handler = nc<
             }
         }
     }).catch((e: Error) => {
-        res.status(500).send(
-            e.name + ": Issue with Class creation"
+        res.send(
+           {Error: `${e.name}`}
         )
-    }).finally(() => prisma.$disconnect)
+    })
 
-    if(course) res.status(200).send({success: "Done!"});
+    if(course) res.send({success: "Done!"});
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

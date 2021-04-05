@@ -29,8 +29,8 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 					},
 				},
 			});
-			if (user) res.status(200).send(user.coursesTeaching);
-			else res.status(500).send("ERROR");
+			if (user) res.send({ courses: user.coursesTeaching });
+			else res.send({ Error: "Error with details" });
 		} else if (type === "student") {
 			user = await prisma.student.findUnique({
 				where: {
@@ -44,10 +44,10 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 					},
 				},
 			});
-			if (user) res.status(200).send(user.coursesEnrolled);
-			else res.status(500).send("ERROR");
+			if (user) res.send({ courses: user.coursesEnrolled });
+			else res.send({ Error: "Error with details" });
 		} else {
-			res.status(500).send("ERROR");
+			res.send({ Error: "Error with details" });
 		}
 	}
 );
