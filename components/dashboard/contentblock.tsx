@@ -14,15 +14,25 @@ import {
 	Header,
 } from "../general/styledcomponents";
 import ClassCard, { CourseResponse } from "./classcard";
+import Spinner from "../general/spinner";
 
 export const DataContainer = styled.div`
 	width: 50%;
 	border: 1px solid var(--accent2);
 	border-radius: var(--border-radius);
-
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 1rem;
 	@media (max-width: 30em) {
 		width: 100%;
 	}
+`;
+
+export const LightTextHeader = styled.span`
+	opacity: 0.8;
+	color: var(--text);
+	margin: 2rem 0;
 `;
 
 const ContentBlock: React.FunctionComponent<SessionUserProps> = ({
@@ -34,37 +44,39 @@ const ContentBlock: React.FunctionComponent<SessionUserProps> = ({
 			return await fetchStudentCourses(user.id);
 		} else return await fetchInstructorCourses(user.id);
 	});
-	const loadingContent = () => {
-		return (
-			<ColumnContainer style={{ marginTop: "1rem" }}>
-				<Header>
-					{isStudent ? "Courses Enrolled In" : "Courses Teaching"}
-				</Header>
-				<DataContainer>Loading</DataContainer>
-			</ColumnContainer>
-		);
-	};
 
 	if (isLoading) {
 		return (
-			<ComponentPage>
-				<ComponentContainer>
-					{isLoading && loadingContent()}
-				</ComponentContainer>
-			</ComponentPage>
+			<ColumnContainer>
+				<Header>
+					{isStudent ? "Courses Enrolled In" : "Courses Teaching"}
+				</Header>
+				<DataContainer>
+					<Spinner />
+				</DataContainer>
+			</ColumnContainer>
 		);
 	}
 
 	const dataContent = () => {
 		return (
 			<ColumnContainer>
-				<Header style={{ margin: "1rem" }}>
+				<Header>
 					{isStudent ? "Courses Enrolled In" : "Courses Teaching"}
 				</Header>
 				<DataContainer>
-					{data.map((element: CourseResponse) => {
-						return <ClassCard course={element} key={element.id} />;
-					})}
+					{data?.length === 0 && (
+						<LightTextHeader>
+							Looks like your not{" "}
+							{isStudent ? "enrolled in" : "teaching"} anything
+						</LightTextHeader>
+					)}
+					{data?.length > 0 &&
+						data.map((element: CourseResponse) => {
+							return (
+								<ClassCard course={element} key={element.id} />
+							);
+						})}
 				</DataContainer>
 			</ColumnContainer>
 		);

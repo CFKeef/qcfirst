@@ -14,6 +14,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import Axios from "axios";
 import Note from "../general/note";
+import Spinner from "../general/spinner.tsx";
 
 type FormData = {
 	email: string;
@@ -54,16 +55,21 @@ const Form: React.FunctionComponent = () => {
 	const { register, handleSubmit, errors } = useForm<FormData>();
 	const [userType, setUserType] = useState("Student");
 	const [error, setError] = useState(false);
+	const [loading, setLoading] = useState(false);
+
 	const router = useRouter();
 	const onSubmit = (data: FormData) => {
+		setLoading(true);
 		Axios.post("/api/signup", { ...data, userType })
 			.then((res) => {
+				setLoading(false);
 				// Success
 				if (res.status === 200) {
 					router.replace("/success/signup");
 				}
 			})
 			.catch((err) => {
+				setLoading(false);
 				setError(true);
 				console.log(err);
 			});
@@ -187,7 +193,9 @@ const Form: React.FunctionComponent = () => {
 					What are you? {generateSwitch()}{" "}
 				</AnchorText>
 
-				<Button topSpace={true}>Register</Button>
+				<Button topSpace={true}>
+					{loading ? <Spinner /> : "Register"}
+				</Button>
 				<AnchorText>
 					Forgot your info? Recover it
 					<Link href="/recover" prefetch={false}>

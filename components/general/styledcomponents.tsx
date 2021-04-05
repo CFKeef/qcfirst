@@ -6,14 +6,14 @@ export const Page = styled.div`
 	justify-content: flex-start;
 	align-items: center;
 	flex-direction: column;
-	min-height: 100vh;
 	min-height: -webkit-fill-available;
+	min-height: 100vh;
 	width: 100vw;
 	overflow: none;
 `;
 
 export const CenteredContentPage = styled(Page)`
-	justify-content: center;
+	justify-content: center !important;
 `;
 
 export const Container = styled.div`

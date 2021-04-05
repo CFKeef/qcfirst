@@ -14,6 +14,7 @@ import Multicheckbox from "../general/input/multicheckbox";
 import { FieldSpan, FormContainer, FormProps } from "../create/form";
 import axios from "axios";
 import { Course } from "@prisma/client";
+import Spinner from "../general/spinner";
 
 export type SearchForm = {
 	CourseName: string;
@@ -37,13 +38,18 @@ const Form: React.FunctionComponent<SearchFormProps> = ({
 }) => {
 	const { register, handleSubmit, control } = useForm();
 	const [err, setErr] = useState(false);
+	const [loading, setLoading] = useState(false);
+
 	const onSubmit = async (data: SearchForm) => {
+		setLoading(true);
 		await axios
 			.post("/api/search", { data: data, id: userID })
 			.then((res) => {
+				setLoading(false);
 				if (res) setResults(res.data.courses);
 			})
 			.catch((err) => {
+				setLoading(false);
 				if (err) setErr(err);
 			});
 		setSearched(true);
@@ -103,7 +109,7 @@ const Form: React.FunctionComponent<SearchFormProps> = ({
 				id={"status"}
 			/>
 			<FieldSpan />
-			<Button type="submit">Search</Button>
+			<Button type="submit">{loading ? <Spinner /> : "Search"}</Button>
 		</FormContainer>
 	);
 };

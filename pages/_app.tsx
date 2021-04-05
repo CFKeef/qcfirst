@@ -24,6 +24,7 @@ body {
 	--error: #F33;
 	--warning: #7928CA;
 	--small-button: 2REM;
+	--purple:#F81CE5;
 }
 
 ::selection {

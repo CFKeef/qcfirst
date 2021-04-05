@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Note from "../general/note";
+import Spinner from "../general/spinner";
 
 type FormData = {
 	email: string;
@@ -53,14 +54,18 @@ const Form: React.FunctionComponent = () => {
 	const { register, handleSubmit, errors } = useForm<FormData>();
 	const [error, setError] = useState(false);
 	const [userType, setUserType] = useState("Student");
+	const [loading, setLoading] = useState(false);
 
 	const onSubmit = (data: FormData) => {
+		setLoading(true);
 		axios
 			.post("/api/login", { ...data, userType })
 			.then((res) => {
+				setLoading(false);
 				if (res.status === 200) router.push("/dashboard");
 			})
 			.catch((err) => {
+				setLoading(false);
 				setError(true);
 				console.log(err);
 			});
@@ -149,7 +154,9 @@ const Form: React.FunctionComponent = () => {
 				>
 					What are you? {generateSwitch()}{" "}
 				</AnchorText>
-				<Button topSpace={true}>Login</Button>
+				<Button topSpace={true}>
+					{loading ? <Spinner /> : "Login"}
+				</Button>
 				<AnchorText>
 					Forgot your info? Recover it
 					<Link href="/recover" prefetch={false}>
