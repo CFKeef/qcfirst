@@ -7,6 +7,8 @@ import { days, departments, semesters } from "./data/data";
 import { Input } from "../general/styledcomponents";
 import axios from "axios";
 import Multicheckbox from "../general/input/multicheckbox";
+import { useRouter } from "next/router";
+import Spinner from "../general/spinner";
 
 export type ClassForm = {
 	CourseName: string;
@@ -53,7 +55,9 @@ export interface FormProps {
 }
 
 const Form: React.FunctionComponent<FormProps> = ({ userID }) => {
+	const router = useRouter();
 	const [loading, setLoading] = useState(false);
+	const [err, setError] = useState(false);
 
 	const { register, handleSubmit, control } = useForm({
 		defaultValues: {
@@ -64,9 +68,16 @@ const Form: React.FunctionComponent<FormProps> = ({ userID }) => {
 	const onSubmit = async (data: ClassForm) => {
 		setLoading(true);
 
-		await axios.post("/api/create", { data, userID }).then((res) => {
-			console.log(res);
-		});
+		await axios
+			.post("/api/create", { data, userID })
+			.then((res) => {
+				if (res.status === 200) router.push("/dashboard");
+				setLoading(false);
+				setError(false);
+			})
+			.catch((err) => {
+				if (err) setError(true);
+			});
 	};
 
 	return (
@@ -129,7 +140,7 @@ const Form: React.FunctionComponent<FormProps> = ({ userID }) => {
 				id={"day"}
 			/>
 			<FieldSpan />
-			<Button type="submit">Submit</Button>
+			<Button type="submit">{loading ? <Spinner /> : "Submit"}</Button>
 		</FormContainer>
 	);
 };

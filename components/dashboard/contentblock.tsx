@@ -16,7 +16,9 @@ import {
 import ClassCard, { CourseResponse } from "./classcard";
 import Spinner from "../general/spinner";
 
-export const DataContainer = styled.div`
+export const DataContainer = styled.ul`
+	padding: 0;
+	list-style-type: none;
 	width: 50%;
 	border: 1px solid var(--accent2);
 	border-radius: var(--border-radius);
@@ -24,6 +26,7 @@ export const DataContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	margin-top: 1rem;
+	flex-direction: column;
 	@media (max-width: 30em) {
 		width: 100%;
 	}
@@ -62,17 +65,18 @@ const ContentBlock: React.FunctionComponent<SessionUserProps> = ({
 		return (
 			<ColumnContainer>
 				<Header>
+					{console.log(data)}
 					{isStudent ? "Courses Enrolled In" : "Courses Teaching"}
 				</Header>
 				<DataContainer>
-					{data?.length === 0 && (
+					{data?.courses.length === 0 && (
 						<LightTextHeader>
 							Looks like your not{" "}
 							{isStudent ? "enrolled in" : "teaching"} anything
 						</LightTextHeader>
 					)}
-					{data?.length > 0 &&
-						data.map((element: CourseResponse) => {
+					{data?.courses.length > 0 &&
+						data.courses.map((element: CourseResponse) => {
 							return (
 								<ClassCard course={element} key={element.id} />
 							);

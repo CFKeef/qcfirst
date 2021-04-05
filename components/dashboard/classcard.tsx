@@ -2,11 +2,13 @@
 // @ts-nocheck
 // Will fix this later having an issue with inheritance
 import { Course } from "@prisma/client";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { ParagraphText, SlimButton } from "../general/styledcomponents";
 import { semesters, departments, statuses } from "../create/data/data";
 import axios from "axios";
+import { useRouter } from "next/router";
+import Spinner from "../general/spinner";
 
 export interface CourseResponse extends Course {
 	enrolled: Course[];
@@ -22,6 +24,7 @@ export const CardListItem = styled.li`
 	margin: 1rem;
 	height: 8rem;
 	border-radius: var(--border-radius);
+	width: calc(100% - 40px);
 `;
 export const PosRow = styled.div`
 	display: flex;
@@ -75,12 +78,13 @@ export const Spacer = styled.br`
 
 const Tab = styled.div`
 	height: 1.5rem;
-	width: 50%;
+	width: 52%;
 	font-size: 14px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: var(--border-radius);
+	color: var(--bg);
 `;
 export const OpenTab = styled(Tab)`
 	background-color: var(--success);
@@ -108,6 +112,7 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 	action,
 	userID,
 }) => {
+	const [loading, setLoading] = useState(false);
 	const generateInstructorDashBoardCard = () => {
 		return (
 			<React.Fragment>
@@ -138,7 +143,7 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 					</BottomText>
 				</InfoColumn>
 				<InfoColumn>
-					<Spacer />
+					<LightText>Scheduled</LightText>
 					<DetailText>
 						{course.startTime}-{course.endTime}
 					</DetailText>
@@ -167,9 +172,13 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 		};
 
 		const handleEnrollment = async () => {
+			setLoading(true);
 			await axios
 				.post("/api/enroll", { courseID: course.id, userID: userID })
-				.then((res) => console.log(res))
+				.then((res) => {
+					setLoading(false);
+					if (res.status === 200) useRouter().push("/dashboard");
+				})
 				.catch((err) => console.log(err));
 		};
 
@@ -194,7 +203,7 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 					<BottomText>{generateStatusCard()}</BottomText>
 				</InfoColumn>
 				<InfoColumn>
-					<Spacer />
+					<LightText>Scheduled</LightText>
 					<DetailText>
 						{course.startTime}-{course.endTime}
 					</DetailText>
@@ -209,7 +218,7 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 					</FieldGroup>
 				</InfoColumn>
 				<ButtonColumn onClick={() => handleEnrollment()}>
-					<SlimButton>Enroll</SlimButton>
+					<SlimButton>{loading ? <Spinner /> : "Enroll"}</SlimButton>
 				</ButtonColumn>
 			</React.Fragment>
 		);
