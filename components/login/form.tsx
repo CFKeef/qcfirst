@@ -67,7 +67,6 @@ const Form: React.FunctionComponent = () => {
 			.catch((err) => {
 				setLoading(false);
 				setError(true);
-				console.log(err);
 			});
 	};
 

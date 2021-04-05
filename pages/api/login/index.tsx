@@ -15,11 +15,7 @@ const comparePassToHash = async (pw: string, hash: string) => {
 	return await bcrypt.compare(pw, hash);
 };
 
-const handleStudentLogin = async (
-	data: FormData,
-	req: AuthorizedRequest,
-	res: NextApiResponse
-) => {
+const handleStudentLogin = async (data: FormData, req: AuthorizedRequest) => {
 	const student = await prisma.student
 		.findUnique({
 			where: {
@@ -27,7 +23,7 @@ const handleStudentLogin = async (
 			},
 		})
 		.catch((err) => {
-			res.send({ Error: `${err.name}` });
+			console.log(err);
 		});
 
 	if (student) {
@@ -43,20 +39,14 @@ const handleStudentLogin = async (
 				isStudent: true,
 			});
 			await req.session.save();
-			res.send({ Success: "Logged in!" });
-		} else {
-			res.send({ Error: "Issue with details provided" });
+			return true;
 		}
-	} else {
-		res.send({ Error: "Not a user" });
 	}
+
+	return false;
 };
 
-const handleInstrutorLogin = async (
-	data: FormData,
-	req: AuthorizedRequest,
-	res: NextApiResponse
-) => {
+const handleInstrutorLogin = async (data: FormData, req: AuthorizedRequest) => {
 	const teacher = await prisma.instructor
 		.findUnique({
 			where: {
@@ -64,7 +54,7 @@ const handleInstrutorLogin = async (
 			},
 		})
 		.catch((err) => {
-			res.send({ Error: `${err.name}` });
+			console.log(err);
 		});
 
 	if (teacher) {
@@ -78,22 +68,27 @@ const handleInstrutorLogin = async (
 				isStudent: false,
 			});
 			await req.session.save();
-			res.send({ Success: "Logged in!" });
-		} else {
-			res.send({ Error: "Issue with details provided" });
+			return true;
 		}
-	} else {
-		res.send({ Error: "Not Registered with us" });
 	}
+
+	return false;
 };
 
 const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 	async (req, res) => {
 		const data = req.body;
 
-		data.userType === "Student"
-			? await handleStudentLogin(data, req, res)
-			: await handleInstrutorLogin(data, req, res);
+		const result =
+			data.userType === "Student"
+				? await handleStudentLogin(data, req)
+				: await handleInstrutorLogin(data, req);
+
+		if (result) {
+			res.status(200).json({ Success: "Logged in!" });
+		} else {
+			res.status(500).json({ Error: "Something went wrong :(" });
+		}
 	}
 );
 

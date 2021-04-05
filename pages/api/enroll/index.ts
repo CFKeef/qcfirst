@@ -29,8 +29,8 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
             });
         } 
       
-        if(result) res.send({success: "Success!"});
-        else res.send({Error: "Error with info provided"})
+        if(result) res.status(200).json({success: "Success!"});
+        else res.status(500).json({Error: "Error with info provided"})
 	}
 );
 

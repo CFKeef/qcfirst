@@ -4,51 +4,59 @@ import { AuthorizedRequest } from "../../../types/util";
 import withSession from "../../../util/session";
 import prisma from "../../../util/prisma";
 
+const getInstructorData = async (id: number) => {
+	const user = await prisma.instructor.findUnique({
+		where: {
+			id: parseInt(id),
+		},
+		include: {
+			coursesTeaching: {
+				include: {
+					enrolled: {
+						select: {
+							id: true,
+							studentID: true,
+							firstName: true,
+							lastName: true,
+						},
+					},
+				},
+			},
+		},
+	});
+	if (user) return user.coursesTeaching;
+	else return null;
+};
+
+const getStudentData = async (id: number) => {
+	const user = await prisma.student.findUnique({
+		where: {
+			id: parseInt(id),
+		},
+		include: {
+			coursesEnrolled: {
+				include: {
+					instructor: true,
+				},
+			},
+		},
+	});
+	if (user) return user.coursesEnrolled;
+	else return null;
+};
+
 const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 	async (req, res) => {
 		const { type } = req.query;
-		let user;
+		const id = req.body.id;
 
-		if (type === "instructor") {
-			user = await prisma.instructor.findUnique({
-				where: {
-					id: parseInt(req.body.id),
-				},
-				include: {
-					coursesTeaching: {
-						include: {
-							enrolled: {
-								select: {
-									id: true,
-									studentID: true,
-									firstName: true,
-									lastName: true,
-								},
-							},
-						},
-					},
-				},
-			});
-			if (user) res.send({ courses: user.coursesTeaching });
-			else res.send({ Error: "Error with details" });
-		} else if (type === "student") {
-			user = await prisma.student.findUnique({
-				where: {
-					id: parseInt(req.body.id),
-				},
-				include: {
-					coursesEnrolled: {
-						include: {
-							instructor: true,
-						},
-					},
-				},
-			});
-			if (user) res.send({ courses: user.coursesEnrolled });
-			else res.send({ Error: "Error with details" });
-		} else {
-			res.send({ Error: "Error with details" });
-		}
+		const data =
+			type === "instructor"
+				? await getInstructorData(id)
+				: await getStudentData(id);
+
+		if (data) res.status(200).json({ courses: data });
+		else res.status(500).json({ courses: [] });
 	}
 );
 

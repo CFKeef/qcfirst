@@ -34,8 +34,8 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
                 }
             }
         })
-        if(result) res.send({courses: result});
-        else res.send({Error: "Error with info provided"})
+        if(result) res.status(200).json({courses: result});
+        else res.status(500).json({Error: "Error with info provided"});
 	}
 );
 

@@ -40,13 +40,12 @@ const handler = nc<
                 }
             }
         }
-    }).catch((e: Error) => {
-        res.send(
-           {Error: `${e.name}`}
-        )
     })
 
-    if(course) res.send({success: "Done!"});
+    if(course) res.status(200).json({Success: "Done!"});
+    else {
+        res.status(500).json({Error: "Something went wrong"})
+    }
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
