@@ -3,6 +3,8 @@ import { NextApiResponse } from "next";
 import { AuthorizedRequest } from "../../../types/util";
 import withSession from "../../../util/session";
 import prisma from "../../../util/prisma";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
 import {Option} from "../../create/data/data";
 
 const handler = nc<
