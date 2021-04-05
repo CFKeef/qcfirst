@@ -43,6 +43,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 					});
 					await req.session.save();
 					res.send(200);
+					res.end();
 				} else {
 					res.status(401).send("Error: Issue with Log in");
 				}
@@ -76,6 +77,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 					});
 					await req.session.save();
 					res.send(200);
+					res.end();
 				} else {
 					res.status(401).send("Error: Issue with Log in");
 				}
