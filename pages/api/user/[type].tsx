@@ -7,7 +7,7 @@ import prisma from "../../../util/prisma";
 const getInstructorData = async (id: number) => {
 	const user = await prisma.instructor.findUnique({
 		where: {
-			id: parseInt(id),
+			id: id,
 		},
 		include: {
 			coursesTeaching: {
@@ -31,7 +31,7 @@ const getInstructorData = async (id: number) => {
 const getStudentData = async (id: number) => {
 	const user = await prisma.student.findUnique({
 		where: {
-			id: parseInt(id),
+			id: id,
 		},
 		include: {
 			coursesEnrolled: {
