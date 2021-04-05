@@ -1,6 +1,6 @@
 import nc from "next-connect";
-import { NextApiRequest, NextApiResponse } from "next";
-import { AuthorizedRequest, LoginRes, SignUpRes } from "../../../types/util";
+import { NextApiResponse } from "next";
+import { AuthorizedRequest } from "../../../types/util";
 import prisma from "../../../util/prisma";
 import bcrypt from "bcryptjs";
 

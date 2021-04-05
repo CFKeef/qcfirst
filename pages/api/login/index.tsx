@@ -23,7 +23,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 					},
 				})
 				.catch((err) => {
-					res.status(500).send(err.name + ": Issue with Log in");
+					res.status(500).end(err.name + ": Issue with Log in");
 				})
 				.finally(() => prisma.$disconnect);
 
@@ -42,8 +42,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 						isStudent: true,
 					});
 					await req.session.save();
-					res.send(200);
-					res.end();
+					res.status(200).send("Logged in!");
 				} else {
 					res.status(401).send("Error: Issue with Log in");
 				}
@@ -76,8 +75,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 						isStudent: false,
 					});
 					await req.session.save();
-					res.send(200);
-					res.end();
+					res.status(200).send("Logged in!");
 				} else {
 					res.status(401).send("Error: Issue with Log in");
 				}
