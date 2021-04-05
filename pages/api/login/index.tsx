@@ -27,7 +27,7 @@ const handleStudentLogin = async (
 			},
 		})
 		.catch((err) => {
-			res.send({ Error: `${err.name} 1` });
+			res.send({ Error: `${err.name}` });
 		});
 
 	if (student) {
@@ -45,10 +45,10 @@ const handleStudentLogin = async (
 			await req.session.save();
 			res.send({ Success: "Logged in!" });
 		} else {
-			res.send({ Error: "Issue with details provided 2" });
+			res.send({ Error: "Issue with details provided" });
 		}
 	} else {
-		res.send({ Error: "Not a user 3" });
+		res.send({ Error: "Not a user" });
 	}
 };
 
@@ -64,7 +64,7 @@ const handleInstrutorLogin = async (
 			},
 		})
 		.catch((err) => {
-			res.send({ Error: `${err.name} 31` });
+			res.send({ Error: `${err.name}` });
 		});
 
 	if (teacher) {
@@ -80,10 +80,10 @@ const handleInstrutorLogin = async (
 			await req.session.save();
 			res.send({ Success: "Logged in!" });
 		} else {
-			res.send({ Error: "Issue with details provided 11" });
+			res.send({ Error: "Issue with details provided" });
 		}
 	} else {
-		res.send({ Error: "Not Registered with us 21" });
+		res.send({ Error: "Not Registered with us" });
 	}
 };
 
@@ -92,8 +92,8 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 		const data = req.body;
 
 		data.userType === "Student"
-			? handleStudentLogin(data, req, res)
-			: handleInstrutorLogin(data, req, res);
+			? await handleStudentLogin(data, req, res)
+			: await handleInstrutorLogin(data, req, res);
 	}
 );
 
