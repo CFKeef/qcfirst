@@ -14,7 +14,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import Axios from "axios";
 import Note from "../general/note";
-import Spinner from "../general/spinner.tsx";
+import Spinner from "../general/spinner";
 
 type FormData = {
 	email: string;
