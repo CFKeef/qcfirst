@@ -63,12 +63,11 @@ const ContentBlock: React.FunctionComponent<SessionUserProps> = ({
 
 	const dataContent = () => {
 		return (
-			<ColumnContainer>
+			<ColumnContainer style={{ marginTop: "2REM" }}>
 				<Header>
-					{console.log(data)}
 					{isStudent ? "Courses Enrolled In" : "Courses Teaching"}
 				</Header>
-				<DataContainer>
+				<DataContainer style={{ marginTop: "2REM" }}>
 					{data?.courses.length === 0 && (
 						<LightTextHeader>
 							Looks like your not{" "}

@@ -9,6 +9,7 @@ import Nav from "../../components/dashboard/nav";
 import Hero from "../../components/dashboard/hero";
 import axios from "axios";
 import ContentBlock from "../../components/dashboard/contentblock";
+import Footer from "../../components/general/footer";
 
 export interface SessionUserProps {
 	user: Student | Instructor;
@@ -34,11 +35,12 @@ const Dashboard: React.FunctionComponent<SessionUserProps> = ({
 			<Head>
 				<title>Dashboard</title>
 			</Head>
+			<Nav user={user} isStudent={isStudent} />
 			<SPAContentContainer>
-				<Nav user={user} isStudent={isStudent} />
 				<Hero user={user} isStudent={isStudent} />
 				<ContentBlock user={user} isStudent={isStudent} />
 			</SPAContentContainer>
+			<Footer isStudent={isStudent} />
 		</Page>
 	);
 };

@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import Form from "../../components/create/form";
 import Nav from "../../components/dashboard/nav";
+import Footer from "../../components/general/footer";
 import { SPAContentContainer } from "../../components/general/spa";
 import { Page } from "../../components/general/styledcomponents";
 import withSession from "../../util/session";
@@ -51,6 +52,7 @@ const Create: React.FunctionComponent<SessionUserProps> = ({
 					</ResponsiveContainer>
 				</PositionContainer>
 			</SPAContentContainer>
+			<Footer isStudent={isStudent} />
 		</Page>
 	);
 };

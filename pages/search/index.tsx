@@ -6,6 +6,7 @@ import { FieldSpan } from "../../components/create/form";
 import ClassCard from "../../components/dashboard/classcard";
 import { DataContainer } from "../../components/dashboard/contentblock";
 import Nav from "../../components/dashboard/nav";
+import Footer from "../../components/general/footer";
 import Note from "../../components/general/note";
 import { SPAContentContainer } from "../../components/general/spa";
 import {
@@ -102,6 +103,7 @@ const Search: React.FunctionComponent<SessionUserProps> = ({
 				<Nav user={user} isStudent={isStudent} />
 				<PositionContainer>{determineContent()}</PositionContainer>
 			</SPAContentContainer>
+			<Footer isStudent={isStudent} />
 		</Page>
 	);
 };
