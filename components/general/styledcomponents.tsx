@@ -9,7 +9,6 @@ export const Page = styled.div`
 	min-height: -webkit-fill-available;
 	min-height: 100vh;
 	width: 100vw;
-	overflow: none;
 `;
 
 export const CenteredContentPage = styled(Page)`
@@ -45,7 +44,7 @@ export const RowContainer = styled.div`
 	flex-direction: row;
 `;
 
-export const Header = styled.h1`
+export const Header = styled.h2`
 	color: var(--text);
 	width: 100%;
 	text-align: center;

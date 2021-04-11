@@ -1,2 +1,9 @@
 const withImages = require("next-images");
-module.exports = withImages();
+const withPlugins = require("next-compose-plugins");
+
+module.exports = withPlugins([[withImages]], {
+	i18n: {
+		locales: ["en-US"],
+		defaultLocale: "en-US",
+	},
+});

@@ -71,7 +71,7 @@ const Form: React.FunctionComponent<SearchFormProps> = ({
 				id={"department"}
 			/>
 			<FieldSpan />
-			<InputLabel>Course Name</InputLabel>
+			<InputLabel htmlFor={"CourseName"}>Course Name</InputLabel>
 			<Input
 				placeholder={"Course Name"}
 				type="text"
@@ -79,14 +79,14 @@ const Form: React.FunctionComponent<SearchFormProps> = ({
 				ref={register({ max: 50, required: false })}
 			/>
 			<FieldSpan />
-			<InputLabel>Start Time</InputLabel>
+			<InputLabel htmlFor={"StartTime"}>Start Time</InputLabel>
 			<Input
 				name="StartTime"
 				type={"time"}
 				ref={register({ required: false })}
 			/>
 			<FieldSpan />
-			<InputLabel>End Time</InputLabel>
+			<InputLabel htmlFor={"EndTime"}>End Time</InputLabel>
 			<Input
 				name="EndTime"
 				type={"time"}

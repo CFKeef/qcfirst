@@ -19,7 +19,7 @@ const Multicheckbox: React.FunctionComponent<DropDownProps> = ({
 
 	return (
 		<DropDownContainer>
-			<InputLabel>{fieldName}</InputLabel>
+			<InputLabel htmlFor={fieldName}>{fieldName}</InputLabel>
 			<Controller
 				as={drop}
 				name={fieldName}

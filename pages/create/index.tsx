@@ -27,7 +27,7 @@ export const PositionContainer = styled.div`
 	width: 100%;
 `;
 
-export const PageTitleText = styled.h1`
+export const PageTitleText = styled.h2`
 	color: var(--fg);
 	text-align: center;
 	width: 100%;

@@ -3,13 +3,25 @@ import styled from "styled-components";
 import { useTheme } from "next-themes";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
-import { ParagraphText } from "./styledcomponents";
+import { ParagraphText, RowContainer } from "./styledcomponents";
+
+const Container = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+`;
 
 const ToggleWrapper = styled.label`
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+	margin: 0 0.5rem 0 0;
+	padding: 0;
+	color: var(--fg);
+	font-size: 0.8rem;
 `;
 
 const Skeleton = styled.div`
@@ -35,10 +47,10 @@ const ThemeToggle: React.FunctionComponent = () => {
 	if (!isMounted) return <Skeleton />;
 
 	return (
-		<ToggleWrapper>
-			<ParagraphText style={{ marginRight: ".5REM" }}>
+		<Container>
+			<ToggleWrapper>
 				{theme === "light" ? "Light Theme" : "Dark Theme"}
-			</ParagraphText>
+			</ToggleWrapper>
 			<Toggle
 				defaultChecked={theme === "light" ? true : false}
 				icons={false}
@@ -46,7 +58,7 @@ const ThemeToggle: React.FunctionComponent = () => {
 					handleChange(e.target.checked);
 				}}
 			/>
-		</ToggleWrapper>
+		</Container>
 	);
 };
 
