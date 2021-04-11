@@ -232,7 +232,20 @@ export const LogoButton = styled(ResetButton)`
 	}
 `;
 
-export const LogoContainer = styled.div<{ theme: string }>``;
+export const LogoContainer = styled.button<{ theme: string }>`
+	background: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	&:hover {
+		cursor: pointer;
+	}
+	${({ theme }) =>
+		theme === "dark" ? "filter: grayscale(1) invert(1);" : null}
+`;
 
 export const ComponentPage = styled.div`
 	width: 100%;

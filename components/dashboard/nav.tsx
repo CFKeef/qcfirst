@@ -5,6 +5,7 @@ import { ResetButton } from "../general/styledcomponents";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { SessionUserProps } from "../../pages/dashboard";
+import LogoHeader from "../general/LogoHeader";
 
 type menuTab = {
 	value: string;
@@ -186,7 +187,7 @@ const Nav: React.FunctionComponent<SessionUserProps> = ({ isStudent }) => {
 	return (
 		<Header id="Header">
 			<Content>
-				<LogoText>Coursor</LogoText>
+				<LogoHeader />
 				{generateMenu()}
 			</Content>
 		</Header>

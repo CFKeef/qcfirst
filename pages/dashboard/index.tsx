@@ -1,5 +1,4 @@
 import { Course, Instructor, Student } from "@prisma/client";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Head from "next/head";
 import { Page } from "../../components/general/styledcomponents";
