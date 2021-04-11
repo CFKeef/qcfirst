@@ -11,16 +11,18 @@ import { useRouter } from "next/router";
 import Spinner from "../general/spinner";
 
 export interface CourseResponse extends Course {
-	enrolled: Course[];
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	enrolled: any;
 }
+
 interface ClassCardProps {
 	course: CourseResponse | Course;
 	view?: string;
-	action?: () => void;
+	action?: (course: CourseResponse | Course) => void;
 	userID?: number;
 }
 export const CardListItem = styled.li`
-	border: 1px solid var(--accent3);
+	border: 2px solid var(--accent3);
 	margin: 1rem;
 	height: 8rem;
 	border-radius: var(--border-radius);
@@ -150,7 +152,9 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 					<DetailText>{course.daysScheduled}</DetailText>
 				</InfoColumn>
 				<ButtonColumn>
-					<SlimButton>{view ? "Enroll" : "View"}</SlimButton>
+					<SlimButton onClick={() => action(course)}>
+						{view ? "Enroll" : "View"}
+					</SlimButton>
 				</ButtonColumn>
 			</React.Fragment>
 		);

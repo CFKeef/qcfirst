@@ -1,6 +1,6 @@
-import { Instructor, Student } from "@prisma/client";
+import { Course, Instructor, Student } from "@prisma/client";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import { Page } from "../../components/general/styledcomponents";
 import { SPAContentContainer } from "../../components/general/spa";
@@ -10,6 +10,8 @@ import Hero from "../../components/dashboard/hero";
 import axios from "axios";
 import ContentBlock from "../../components/dashboard/contentblock";
 import Footer from "../../components/general/footer";
+import { CourseResponse } from "../../components/dashboard/classcard";
+import CourseModal from "../../components/general/modals/course";
 
 export interface SessionUserProps {
 	user: Student | Instructor;
@@ -30,6 +32,21 @@ const Dashboard: React.FunctionComponent<SessionUserProps> = ({
 	user,
 	isStudent,
 }) => {
+	const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
+	const [selectedCourse, setSelectedCourse] = useState<
+		CourseResponse | Course
+	>();
+
+	const generateCourseModal = (course: CourseResponse | Course) => {
+		setSelectedCourse(course);
+		setIsCourseModalOpen(true);
+	};
+
+	const handleModalClose = () => {
+		setSelectedCourse(undefined);
+		setIsCourseModalOpen(false);
+	};
+
 	return (
 		<Page>
 			<Head>
@@ -38,8 +55,22 @@ const Dashboard: React.FunctionComponent<SessionUserProps> = ({
 			<Nav user={user} isStudent={isStudent} />
 			<SPAContentContainer>
 				<Hero user={user} isStudent={isStudent} />
-				<ContentBlock user={user} isStudent={isStudent} />
+				<ContentBlock
+					user={user}
+					isStudent={isStudent}
+					openCourseModal={generateCourseModal}
+				/>
 			</SPAContentContainer>
+			{isCourseModalOpen ? (
+				<CourseModal
+					course={selectedCourse}
+					closeModal={handleModalClose}
+					isStudent={isStudent}
+					dropClass={() => {
+						console.log("dropped");
+					}}
+				/>
+			) : null}
 			<Footer isStudent={isStudent} />
 		</Page>
 	);

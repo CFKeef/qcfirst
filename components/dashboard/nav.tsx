@@ -13,7 +13,7 @@ type menuTab = {
 
 const Header = styled.header`
 	width: 100%;
-	border-bottom: 1px solid var(--accent3);
+	border-bottom: 2px solid var(--accent3);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -109,7 +109,7 @@ const LogOutButton = styled(ResetButton)`
 	width: 5rem;
 	color: var(--bg);
 	font-size: 14px;
-	border: 1px solid var(--fg);
+	border: 2px solid var(--fg);
 
 	&:hover {
 		opacity: 0.95;

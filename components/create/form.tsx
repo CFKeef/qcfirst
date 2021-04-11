@@ -30,7 +30,7 @@ export const FormContainer = styled.form`
 	flex-direction: column;
 	width: 45%;
 	padding: 1rem;
-	border: 1px solid var(--accent3);
+	border: 2px solid var(--accent3);
 	margin-bottom: 2rem;
 
 	@media (max-width: 30em) {

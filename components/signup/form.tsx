@@ -38,7 +38,7 @@ const SwitchButton = styled.button<{ position?: string; active?: boolean }>`
 	height: var(--small-button);
 	border-radius: ${({ position }) =>
 		position === "left" ? "5px 0 0 5px" : "0 5px 5px 0"};
-	border: 1px solid var(--accent2);
+	border: 2px solid var(--accent2);
 	background-color: ${({ active }) =>
 		active ? "var(--accent1)" : "var(--bg)"};
 	cursor: pointer;

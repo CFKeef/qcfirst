@@ -30,7 +30,7 @@ export interface DropDownProps {
 export const CustomSelect = styled(Select)`
 	.Select__control {
 		background-color: var(--bg);
-		border: var(--accent2) 1px solid;
+		border: var(--accent2) 2px solid;
 		box-shadow: none;
 		outline: none;
 		&:hover {
@@ -70,7 +70,7 @@ export const CustomSelect = styled(Select)`
 	}
 	.Select__menu {
 		background-color: var(--bg);
-		border: var(--accent2) 1px solid;
+		border: var(--accent2) 2px solid;
 		color: var(--fg);
 
 		.Select__menu-list {

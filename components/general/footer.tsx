@@ -52,7 +52,7 @@ export const ColumnEntry = styled.a`
 
 const BottomContainer = styled.div`
 	margin-top: auto !important;
-	border-top: 1px solid var(--accent3);
+	border-top: 2px solid var(--accent3);
 	width: 100%;
 	display: flex;
 	justify-content: center;

@@ -15,12 +15,13 @@ import {
 } from "../general/styledcomponents";
 import ClassCard, { CourseResponse } from "./classcard";
 import Spinner from "../general/spinner";
+import { Course } from "@prisma/client";
 
 export const DataContainer = styled.ul`
 	padding: 0;
 	list-style-type: none;
 	width: 50%;
-	border: 1px solid var(--accent2);
+	border: 2px solid var(--accent2);
 	border-radius: var(--border-radius);
 	display: flex;
 	justify-content: center;
@@ -38,9 +39,14 @@ export const LightTextHeader = styled.span`
 	margin: 2rem 0;
 `;
 
-const ContentBlock: React.FunctionComponent<SessionUserProps> = ({
+interface ContentBlockProps extends SessionUserProps {
+	openCourseModal: (course: CourseResponse | Course) => void;
+}
+
+const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
 	user,
 	isStudent,
+	openCourseModal,
 }) => {
 	const { data, isLoading } = useQuery("course", async () => {
 		if (isStudent) {
@@ -70,14 +76,18 @@ const ContentBlock: React.FunctionComponent<SessionUserProps> = ({
 				<DataContainer style={{ marginTop: "2REM" }}>
 					{data?.courses.length === 0 && (
 						<LightTextHeader>
-							Looks like your not{" "}
+							Looks like you're not{" "}
 							{isStudent ? "enrolled in" : "teaching"} anything
 						</LightTextHeader>
 					)}
 					{data?.courses.length > 0 &&
 						data.courses.map((element: CourseResponse) => {
 							return (
-								<ClassCard course={element} key={element.id} />
+								<ClassCard
+									course={element}
+									key={element.id}
+									action={openCourseModal}
+								/>
 							);
 						})}
 				</DataContainer>

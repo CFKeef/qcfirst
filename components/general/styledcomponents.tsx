@@ -24,7 +24,7 @@ export const Container = styled.div`
 
 export const BorderedContainer = styled(Container)`
 	@media (min-width: 30em) {
-		border: 1px solid var(--accent2);
+		border: 2px solid var(--accent2);
 		border-radius: var(--border-radius);
 	}
 `;
@@ -71,7 +71,7 @@ export const InputLabel = styled.label<{ topSpace?: boolean }>`
 
 export const Input = styled.input<{ topSpace?: boolean }>`
 	background-color: var(--bg);
-	border: 1px solid var(--accent2);
+	border: 2px solid var(--accent2);
 	border-radius: var(--border-radius);
 	color: var(--fg);
 	height: var(--form-height);
@@ -87,7 +87,7 @@ export const Input = styled.input<{ topSpace?: boolean }>`
 
 	&:focus {
 		border-radius: var(--border-radius);
-		border: 1px solid var(--accent5);
+		border: 2px solid var(--accent5);
 		outline: none;
 
 		& + svg {
@@ -101,7 +101,7 @@ export const Input = styled.input<{ topSpace?: boolean }>`
 
 export const TextBox = styled.textarea`
 	background-color: var(--bg);
-	border: 1px solid var(--accent2);
+	border: 2px solid var(--accent2);
 	border-radius: var(--border-radius);
 	color: var(--fg);
 
@@ -115,7 +115,7 @@ export const TextBox = styled.textarea`
 	resize: none;
 	&:focus {
 		border-radius: var(--border-radius);
-		border: 1px solid var(--accent5);
+		border: 2px solid var(--accent5);
 		outline: none;
 
 		& + svg {
@@ -135,7 +135,7 @@ export const Button = styled.button<{ topSpace?: boolean }>`
 	height: var(--form-height);
 	width: 100%;
 	background-color: var(--fg);
-	border: 1px solid var(--fg);
+	border: 2px solid var(--fg);
 	font-weight: bold;
 	letter-spacing: var(--letter-spacing);
 	border-radius: var(--border-radius);
