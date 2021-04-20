@@ -12,9 +12,9 @@ export interface SignUpRes extends Object {
 }
 
 export type StudentSession = {
-	email: string,
-	firstName: string,
-	id: number,
-	isStudent: true,
-	lastName: string
-}
+	email: string;
+	firstName: string;
+	id: number;
+	isStudent: true;
+	lastName: string;
+};

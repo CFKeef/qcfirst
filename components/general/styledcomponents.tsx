@@ -256,7 +256,7 @@ export const ComponentPage = styled.div`
 
 export const ComponentContainer = styled.section`
 	margin: 0 20px;
-	width: calc(100%-40px);
+	width: calc(100% - 40px);
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;

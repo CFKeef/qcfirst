@@ -85,7 +85,7 @@ const MenuOption = styled.li<{ selected: boolean }>`
 	}
 
 	&:active {
-		scale: 0.95;
+		transform: scale(0.95);
 	}
 `;
 
