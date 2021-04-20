@@ -264,3 +264,21 @@ export const ComponentContainer = styled.section`
 	max-width: 1100px;
 	width: 100%;
 `;
+
+export const SemanticAnchorText = styled.div`
+	margin: 0;
+	padding: 0;
+	color: var(--fg);
+	font-size: 1rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	margin-top: var(--fullgap);
+	a {
+		margin-left: 0.25rem;
+	}
+`;

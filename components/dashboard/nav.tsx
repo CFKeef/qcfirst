@@ -123,11 +123,6 @@ const LogOutButton = styled(ResetButton)`
 	}
 `;
 
-const LogoText = styled.h1`
-	color: var(--fg);
-	margin: 0.5rem 0;
-`;
-
 const Nav: React.FunctionComponent<SessionUserProps> = ({ isStudent }) => {
 	const router = useRouter();
 	/**

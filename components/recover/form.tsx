@@ -11,7 +11,7 @@ import {
 import { IoMail } from "react-icons/io5";
 import styled from "styled-components";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
 type FormData = {
 	email: string;
 };
@@ -21,8 +21,12 @@ const IconInputContainer = styled.div`
 `;
 
 const Form: React.FunctionComponent = () => {
+	const history = useRouter();
 	const { register, handleSubmit } = useForm<FormData>();
-	const onSubmit = (data: FormData) => console.log(data);
+	const onSubmit = (data: FormData) => {
+		console.log(data);
+		history.push("/success/recovery");
+	};
 
 	return (
 		<Container style={{ margin: "2rem 0" }}>

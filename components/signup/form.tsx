@@ -8,6 +8,7 @@ import {
 	Button,
 	AnchorText,
 	TextLinkAnchor,
+	SemanticAnchorText,
 } from "../general/styledcomponents";
 import { IoMail, IoKey, IoInformationCircle } from "react-icons/io5";
 import styled from "styled-components";
@@ -183,7 +184,7 @@ const Form: React.FunctionComponent = () => {
 						}}
 					/>
 				</IconInputContainer>
-				<AnchorText
+				<SemanticAnchorText
 					style={{
 						display: "flex",
 						justifyContent: "space-between",
@@ -191,7 +192,7 @@ const Form: React.FunctionComponent = () => {
 					}}
 				>
 					What are you? {generateSwitch()}{" "}
-				</AnchorText>
+				</SemanticAnchorText>
 
 				<Button topSpace={true}>
 					{loading ? <Spinner /> : "Register"}
