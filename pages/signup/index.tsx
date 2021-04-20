@@ -10,7 +10,7 @@ import ThemeToggle from "../../components/general/themetoggle";
 import Head from "next/head";
 import withSession from "../../util/session";
 
-export const getServerSideProps = withSession(async ({ req, res }) => {
+export const getServerSideProps = withSession(async ({ req }) => {
 	const user = req.session.get("user");
 
 	if (user) {

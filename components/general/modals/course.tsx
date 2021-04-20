@@ -1,4 +1,4 @@
-import { Course, Student } from "@prisma/client";
+import { Course } from "@prisma/client";
 import React from "react";
 import { CourseResponse } from "../../dashboard/classcard";
 import { Header, ParagraphText, SlimButton } from "../styledcomponents";

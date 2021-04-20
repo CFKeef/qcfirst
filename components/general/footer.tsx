@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { ResponsiveContainer } from "../../pages/create";
 import ThemeToggle from "./themetoggle";
 
 const FooterContainer = styled.footer`

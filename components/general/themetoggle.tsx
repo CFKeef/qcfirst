@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useTheme } from "next-themes";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
-import { ParagraphText, RowContainer } from "./styledcomponents";
 
 const Container = styled.div`
 	width: 100%;

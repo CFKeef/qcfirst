@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Course, Instructor, Student } from "@prisma/client";
 import React, { useState } from "react";
 import Head from "next/head";

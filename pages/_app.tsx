@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import React from "react";
 import { createGlobalStyle } from "styled-components";
@@ -7,7 +8,6 @@ import { normalize } from "styled-normalize";
 import type { AppProps, NextWebVitalsMetric } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
-import { ReactQueryDevtools } from "react-query/devtools";
 
 const GlobalStyle = createGlobalStyle`
 ${normalize}
@@ -83,6 +83,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 	);
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function reportWebVitals(metric: NextWebVitalsMetric) {
 	console.log(metric);
 }

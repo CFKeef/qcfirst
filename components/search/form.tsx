@@ -37,7 +37,7 @@ const Form: React.FunctionComponent<SearchFormProps> = ({
 	setSearched,
 }) => {
 	const { register, handleSubmit, control } = useForm();
-	const [err, setErr] = useState(false);
+	const [, setErr] = useState(false);
 	const [loading, setLoading] = useState(false);
 
 	const onSubmit = async (data: SearchForm) => {

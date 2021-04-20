@@ -57,7 +57,7 @@ export interface FormProps {
 const Form: React.FunctionComponent<FormProps> = ({ userID }) => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
-	const [err, setError] = useState(false);
+	const [, setError] = useState(false);
 
 	const { register, handleSubmit, control } = useForm({
 		defaultValues: {
