@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "./scripts/build.sh",
+    "build": "next build && yarn studio",
     "start": "next start",
-    "lint": "yarn eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "yarn eslint . --ext .js,.jsx,.ts,.tsx",
+    "studio": "./scripts/build.sh"
   },
   "dependencies": {
     "@prisma/client": "2.19.0",
