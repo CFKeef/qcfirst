@@ -93,7 +93,6 @@ const CourseModal: React.FunctionComponent<CourseModalProps> = ({
 	course,
 	closeModal,
 	isStudent,
-	dropClass,
 }) => {
 	const generateInstructorFields = () => {
 		return (

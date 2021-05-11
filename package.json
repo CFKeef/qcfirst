@@ -11,6 +11,7 @@
   "dependencies": {
     "@prisma/client": "2.19.0",
     "@prisma/studio": "^0.387.0",
+    "@prisma/studio-vercel": "^0.387.0",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cookie": "^0.4.1",
