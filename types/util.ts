@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextApiRequest } from "next";
 export interface AuthorizedRequest extends NextApiRequest {
 	session: any;

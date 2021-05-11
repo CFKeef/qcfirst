@@ -9,6 +9,39 @@ interface SearchFormRequest extends SearchForm {
 	userID: number;
 }
 
+type Query = {
+	semester?: string;
+	name?: string;
+	department?: string;
+	deadline?: { gte: Date };
+	startTime?: { gte: string };
+	endTime?: { lte: string };
+	daysScheduled?: { contains: string };
+	status?: number;
+};
+
+const buildPrismaQuery = (data: SearchFormRequest) => {
+	const query: Query = {};
+
+	query.semester = data.Semester.value;
+
+	query.department = data.Department.value;
+
+	if (data.CourseName?.length > 0) query.name = data.CourseName;
+
+	query.deadline = { gte: new Date() };
+
+	if (data.Scheduled) {
+		const str = data.Scheduled.map((day) => {
+			return day.value;
+		}).join("");
+
+		query.daysScheduled = { contains: str };
+	}
+
+	return query;
+};
+
 const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 	async (req, res) => {
 		const data: SearchFormRequest = req.body.data;
@@ -16,13 +49,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 		// Need to find what fields to use in filter
 		const result = await prisma.course.findMany({
 			where: {
-				semester: data.Semester.value,
-				// name: data.CourseName.length > 0 ? data.CourseName : undefined ,
-				// department: data.Department?.value,
-				// status: data.status,
-				// daysScheduled: {
-				//     contains:
-				//}
+				AND: [buildPrismaQuery(data)],
 			},
 			include: {
 				enrolled: true,
@@ -39,4 +66,5 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 	}
 );
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default withSession(handler as any);

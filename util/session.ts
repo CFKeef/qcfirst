@@ -1,5 +1,6 @@
 import { Handler, withIronSession } from "next-iron-session";
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const withSession = (handler: Handler) => {
 	return withIronSession(handler, {
 		password: process.env.FAUNA_DB_KEY as string,
