@@ -1,9 +1,0 @@
-{
-    "version": 2,
-    "routes": [
-        {
-            "src": "/_internal/studio",
-            "dest": "/_internal/vercel.html"
-        }
-    ]
-}

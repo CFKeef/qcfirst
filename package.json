@@ -4,15 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && yarn studio",
+    "build": "next build",
     "start": "next start",
     "lint": "yarn eslint . --ext .js,.jsx,.ts,.tsx",
     "studio": "./scripts/build.sh"
   },
   "dependencies": {
     "@prisma/client": "2.19.0",
-    "@prisma/studio": "^0.387.0",
-    "@prisma/studio-vercel": "^0.387.0",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cookie": "^0.4.1",
