@@ -373,6 +373,11 @@
   resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-2.19.0-39.c1455d0b443d66b0d9db9bcb1bb9ee0d5bbc511d.tgz#db2809a6f7f18584e3ca89b1f5bad884155629ec"
   integrity sha512-rEWpaG7wZvPuWJC5SwkBB/Iwue//oC5yv58Mse7r+ibtgkA7vGdWc1bFDQ32DT9tDL5WSC6bBwqEASGV/1Gm1Q==
 
+"@prisma/studio@^0.387.0":
+  version "0.387.0"
+  resolved "https://registry.yarnpkg.com/@prisma/studio/-/studio-0.387.0.tgz#66b9cdf9610a8b89f56d14abdce7819030d1f5a5"
+  integrity sha512-ZOuVNbbbjWQPlesZn4o3nZHeWdEwJ5CMSfXHP/kzaeJ6z1647vXbum+JJQyAby2+j3URqrgBzSkOwNS5LDoyNw==
+
 "@types/bcryptjs@^2.4.2":
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/@types/bcryptjs/-/bcryptjs-2.4.2.tgz#e3530eac9dd136bfdfb0e43df2c4c5ce1f77dfae"
