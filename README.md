@@ -2,35 +2,7 @@
 
 # Coursor
 
-## A Course management system for students and teachers
-
-### Current Goal: MVP
-
-MVP will require:
-
--   Users
--   Support for Students
--   Support for Professors
-    -Session
-    -CRUD Bits
--   CRUD Ops on Courses
--   Crud Ops for User Accounts
-    -Enrollment Manage
--   Validation Logic
-
-### To use it
-
-Just head over to [the deployed site and take a look!](https://coursor.io)
-
-OR
-
-Clone the repo and type
-
-```
-yarn dev
-```
-
-You will need to set environment variables for your DATABASE_URL
+A course management system for students and professors. Written by me :)
 
 ### Features
 
@@ -40,24 +12,29 @@ You will need to set environment variables for your DATABASE_URL
 -   Teachers are able to view courses they are teaching and create new courses
 
 -All CRUD operations are supported
+
 -Day/Night theme
+
+-Stale while revalidate pattern
+
+### Technology
+
+On the front end:
+-NextJS
+-React
+-Styled Components
+
+On the backend:
+NextJS allows you to skip having an express server so I did everything through its "backend" using next-connect
+
+
+And for my database I used Postgresql
+
 
 ### Design
 
 Heres the general look of the pages but they are subject to change as I bring it to development. Notes may be visible as well.
 
-### Responsiveness Layout
-
-#### Mobile
-We use a margin of 20px around the body of the content to keep it from touching the edges and flex on the container to arrange it in a column with with being the 100% - 40px
-![Layout for mobile](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/mobileLayout.png)
-
-#### Desktop
-For desktop we use these two components for a responsive layout:
-![Screenshot of components](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/carbon.png)
-
-This gives us an extremely responsive layout that stacks its children like a "stack of books".
-![Layout for Desktop](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/desktopLayout.png)
 #### Form Pages (Login, Signup, recover)
 
 ![Form Page UI Screenshot on Mobile](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/Screen%20Shot%202021-03-20%20at%2012.44.03%20PM.png)
@@ -80,3 +57,11 @@ This gives us an extremely responsive layout that stacks its children like a "st
 ![Search UI Screenshot on Mobile](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/Screen%20Shot%202021-03-20%20at%2012.44.47%20PM.png)
 ![Search UI Screenshot on Tablet](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/tabletSearch.png)
 ![Search UI Screenshot on Desktop](https://raw.githubusercontent.com/CFKeef/qcfirst/main/public/images/readme/Screen%20Shot%202021-03-20%20at%2012.44.53%20PM.png)
+
+#### Differences
+- No calendar section and menu items differ
+- Virtualization and Infinite scrolling is not on app
+- Layout shift from nav on bottom to moved to top for mobile
+- Search/Results is split up on main app but the mock up has them sharing the page
+
+
