@@ -8,15 +8,14 @@ datasource db {
 }
 
 model Student {
-  id              Int        @id @default(autoincrement())
-  studentID       Int        @unique
-  email           String     @unique @db.VarChar(50)
-  firstName       String     @db.VarChar(50)
-  lastName        String     @db.VarChar(50)
-  password        String     @db.VarChar(100)
-  authenticated   Boolean    @default(false)
-  coursesEnrolled Course[]   @relation(references: [id])
-  searches        Searches[]
+  id              Int      @id @default(autoincrement())
+  studentID       Int      @unique
+  email           String   @unique @db.VarChar(50)
+  firstName       String   @db.VarChar(50)
+  lastName        String   @db.VarChar(50)
+  password        String   @db.VarChar(100)
+  authenticated   Boolean  @default(false)
+  coursesEnrolled Course[] @relation(references: [id])
 }
 
 model Instructor {
@@ -44,12 +43,4 @@ model Course {
   instructor    Instructor @relation(references: [id], fields: [instructorId])
   enrolled      Student[]  @relation(references: [id])
   instructorId  Int
-}
-
-model Searches {
-  id         Int     @id @default(autoincrement())
-  searchedBy Student @relation(references: [id], fields: [studentId])
-  query      Json    @db.Json
-  results    Json    @db.Json
-  studentId  Int
 }

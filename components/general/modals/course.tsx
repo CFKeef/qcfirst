@@ -134,6 +134,7 @@ const CourseModal: React.FunctionComponent<CourseModalProps> = ({
 		return (
 			<React.Fragment>
 				<ButtonGroup>
+					<SlimButton onClick={() => closeModal()}>Drop</SlimButton>
 					<SlimButton onClick={() => closeModal()}>Close</SlimButton>
 				</ButtonGroup>
 			</React.Fragment>

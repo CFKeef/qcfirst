@@ -3,7 +3,6 @@ import { NextApiResponse } from "next";
 import { AuthorizedRequest } from "../../../types/util";
 import prisma from "../../../util/prisma";
 import withSession from "../../../util/session";
-import { Course } from "@prisma/client";
 
 type EnrollmentRequest = {
 	courseID: number;
@@ -12,15 +11,8 @@ type EnrollmentRequest = {
 
 const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 	async (req, res) => {
-		const validate = async () => {
-			// Check if full
-			const course: Course | null = await prisma.course.findFirst({
-				where: {
-					id: data.courseID,
-				},
-			});
-
-			if (course?.capacity === 30) return false;
+		const validate = () => {
+			return true;
 		};
 		const data: EnrollmentRequest = req.body;
 		let result = null;
