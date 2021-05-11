@@ -115,6 +115,7 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 	userID,
 }) => {
 	const [loading, setLoading] = useState(false);
+	const router = useRouter();
 	const generateInstructorDashBoardCard = () => {
 		return (
 			<React.Fragment>
@@ -181,7 +182,7 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 				.post("/api/enroll", { courseID: course.id, userID: userID })
 				.then((res) => {
 					setLoading(false);
-					if (res.status === 200) useRouter().push("/dashboard");
+					if (res.status === 200) router.push("/dashboard");
 				})
 				.catch((err) => console.log(err));
 		};

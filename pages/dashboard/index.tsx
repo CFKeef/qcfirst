@@ -33,9 +33,8 @@ const Dashboard: React.FunctionComponent<SessionUserProps> = ({
 	isStudent,
 }) => {
 	const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
-	const [selectedCourse, setSelectedCourse] = useState<
-		CourseResponse | Course
-	>();
+	const [selectedCourse, setSelectedCourse] =
+		useState<CourseResponse | Course>();
 
 	const generateCourseModal = (course: CourseResponse | Course) => {
 		setSelectedCourse(course);
