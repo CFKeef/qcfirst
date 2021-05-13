@@ -1,3 +1,5 @@
+import prisma from "./prisma";
+
 export const makeTimeStringPretty = (time: string) => {
 	const [hour, minutes] = time.split(":");
 
@@ -13,4 +15,35 @@ export const makeTimeStringPretty = (time: string) => {
 	const isAm = parsedHour < 12;
 
 	return `${convertedHour}:${convertedMinutes}${isAm ? "AM" : "PM"}`;
+};
+
+export const fetchDataByTableName = async (table: string) => {
+	switch (table) {
+		case "searches":
+			return await prisma.searches.findMany({
+				include: {
+					searchedBy: true,
+				},
+			});
+		case "instructor":
+			return await prisma.instructor.findMany({
+				include: {
+					coursesTeaching: true,
+				},
+			});
+		case "student":
+			return await prisma.student.findMany({
+				include: {
+					coursesEnrolled: true,
+					searches: true,
+				},
+			});
+		default:
+			return await prisma.course.findFirst({
+				include: {
+					instructor: true,
+					enrolled: true,
+				},
+			});
+	}
 };
