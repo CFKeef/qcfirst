@@ -1,20 +1,11 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React from "react";
 import DatabaseView from "../../components/admin/dbview";
 import { SPAContentContainer } from "../../components/general/spa";
 import { Page } from "../../components/general/styledcomponents";
 import { PositionContainer, ResponsiveContainer } from "../create";
 
 const AdminDash = (): JSX.Element => {
-	const [view, setView] = useState("");
-
-	const determineContent = () => {
-		switch (view) {
-			default:
-				return <DatabaseView setView={setView} />;
-		}
-	};
-
 	return (
 		<Page>
 			<Head>
@@ -23,7 +14,7 @@ const AdminDash = (): JSX.Element => {
 			<SPAContentContainer>
 				<PositionContainer>
 					<ResponsiveContainer>
-						{determineContent()}
+						<DatabaseView />
 					</ResponsiveContainer>
 				</PositionContainer>
 			</SPAContentContainer>
