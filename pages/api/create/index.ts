@@ -29,7 +29,7 @@ const handler = nc<AuthorizedRequest, NextApiResponse>().post(
 				department: data.Department.value,
 				capacity: parseInt(data.Capacity),
 				description: data.Description,
-				deadline: new Date().toISOString(),
+				deadline: new Date("2021/08/28"),
 				startTime: data.StartTime,
 				endTime: data.EndTime,
 				// @ts-ignore

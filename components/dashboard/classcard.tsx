@@ -9,6 +9,7 @@ import { semesters, departments, statuses } from "../create/data/data";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Spinner from "../general/spinner";
+import { makeTimeStringPretty } from "../../util/fcs";
 
 export interface CourseResponse extends Course {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -115,6 +116,11 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 	userID,
 }) => {
 	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(false);
+	const [errMsg, setErrMsg] = useState("");
+
+	const history = useRouter();
+
 	const generateInstructorDashBoardCard = () => {
 		return (
 			<React.Fragment>
@@ -147,7 +153,8 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 				<InfoColumn>
 					<LightText>Scheduled</LightText>
 					<DetailText>
-						{course.startTime}-{course.endTime}
+						{makeTimeStringPretty(course.startTime)}-
+						{makeTimeStringPretty(course.endTime)}
 					</DetailText>
 					<DetailText>{course.daysScheduled}</DetailText>
 				</InfoColumn>
@@ -181,9 +188,14 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 				.post("/api/enroll", { courseID: course.id, userID: userID })
 				.then((res) => {
 					setLoading(false);
-					if (res.status === 200) useRouter().push("/dashboard");
+					if (res.status === 200) history.push("/dashboard");
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					setLoading(false);
+					console.log(err);
+					setError(true);
+					setErrMsg("Failed to Enroll");
+				});
 		};
 
 		return (
@@ -209,7 +221,8 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 				<InfoColumn>
 					<LightText>Scheduled</LightText>
 					<DetailText>
-						{course.startTime}-{course.endTime}
+						{makeTimeStringPretty(course.startTime)}-
+						{makeTimeStringPretty(course.endTime)}
 					</DetailText>
 					<DetailText>{course.daysScheduled}</DetailText>
 					<FieldGroup>
@@ -221,9 +234,17 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 						</DetailText>
 					</FieldGroup>
 				</InfoColumn>
-				<ButtonColumn onClick={() => handleEnrollment()}>
-					<SlimButton>{loading ? <Spinner /> : "Enroll"}</SlimButton>
-				</ButtonColumn>
+				{error ? (
+					<ButtonColumn>
+						<SlimButton>Error</SlimButton>
+					</ButtonColumn>
+				) : (
+					<ButtonColumn onClick={() => handleEnrollment()}>
+						<SlimButton>
+							{loading ? <Spinner /> : "Enroll"}
+						</SlimButton>
+					</ButtonColumn>
+				)}
 			</React.Fragment>
 		);
 	};
