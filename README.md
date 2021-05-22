@@ -23,6 +23,19 @@ I did everything which involved designing it first, then bringing it to reality 
 * Day/Night theme
 * Stale while revalidate pattern
 
+### Feature Location
+* Can be seen on the sign in page and the view on the dashboard is different depending on what type of user is logged in
+  * [Sign In Roles](https://coursor.io/)
+  * [Dashboard - Protected by session so you need to log in](https://coursor.io/dashboard) 
+* When logged in as a student you can see these actions by interacting with the course element and the search page
+  * [Dashboard - Protected by session so you need to log in](https://coursor.io/dashboard)
+  * [Search - Protected by session so you need to log in](https://coursor.io/search)
+* Day and night toggle appears on all pages. Interacting with it shifts the themes
+  * [Sign In Toggle](https://coursor.io/)
+* SWR Pattern can be immediately seen when logging into your dashboard or searching for courses. ITs the process of fetching data and
+  * [Dashboard - Protected by session so you need to log in](https://coursor.io/dashboard)
+  * [Search - Protected by session so you need to log in](https://coursor.io/search)
+ 
 ### Technology
 
 On the front end:
