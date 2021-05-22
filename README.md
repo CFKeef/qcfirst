@@ -50,12 +50,15 @@ On the front end:
   * I like having one file for everything and styled components allow me to skip css files for each component I make.
 * React Query
   * Super powerful data-fetching library I've grown to love. It trivializes fetching, caching and updating state without having to mess with any "global state".
-  * The dev tools they have are also great for figuring out whats wrong
+  * The dev tools they have are also great for figuring out whats wrong.
+  
 On the backend:
 * Next-connect
+  * Routing based off connect and is very similar to express.
+  * Used to handle the routes within the application.
 * Prisma 
   * Typescript ORM I've been really enjoying.
-  * Has a nice visualizer you can run alongside development that makes it easier to check the status of your tables
+  * Has a nice visualizer you can run alongside development that makes it easier to check the status of your tables.
  
 For databases:
 * Postgresql
