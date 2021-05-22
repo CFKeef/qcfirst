@@ -15,8 +15,8 @@ model Student {
   lastName        String     @db.VarChar(50)
   password        String     @db.VarChar(100)
   authenticated   Boolean    @default(false)
-  coursesEnrolled Course[]   @relation(references: [id])
   searches        Searches[]
+  coursesEnrolled Course[]
 }
 
 model Instructor {
@@ -41,15 +41,15 @@ model Course {
   startTime     String
   endTime       String
   daysScheduled String
-  instructor    Instructor @relation(references: [id], fields: [instructorId])
-  enrolled      Student[]  @relation(references: [id])
   instructorId  Int
+  instructor    Instructor @relation(fields: [instructorId], references: [id])
+  enrolled      Student[]
 }
 
 model Searches {
   id         Int     @id @default(autoincrement())
-  searchedBy Student @relation(references: [id], fields: [studentId])
-  query      String
-  results    String
+  query      Json
+  results    Json
   studentId  Int
+  searchedBy Student @relation(fields: [studentId], references: [id])
 }

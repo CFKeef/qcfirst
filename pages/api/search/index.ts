@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import nc from "next-connect";
 import { NextApiResponse } from "next";
 import { AuthorizedRequest } from "../../../types/util";
@@ -15,8 +13,8 @@ interface SearchFormRequest extends SearchForm {
 const updateSearches = async (query: Query, results: Course[], id: number) => {
 	await prisma.searches.create({
 		data: {
-			query: JSON.parse(query),
-			results: JSON.parse(results),
+			query: { query },
+			results: { results },
 			searchedBy: {
 				connect: {
 					id: id,

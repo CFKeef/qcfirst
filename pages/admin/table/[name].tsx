@@ -136,13 +136,22 @@ const View = ({ data }) => {
 						{jsonData.map((entry) => {
 							return (
 								<tr key={entry.id + "row"}>
-									{Object.values(entry).map((value) => {
-										return (
-											<td key={"valueCell" + entry.id}>
-												{value}
-											</td>
-										);
-									})}
+									{Object.values(entry).map(
+										(value, index) => {
+											return (
+												<td
+													key={
+														"valueCell" +
+														value +
+														index +
+														entry.id
+													}
+												>
+													{value}
+												</td>
+											);
+										}
+									)}
 								</tr>
 							);
 						})}
@@ -152,7 +161,7 @@ const View = ({ data }) => {
 		};
 
 		const generateSearchesTable = () => {
-			const jsonData = JSON.parse(data);
+			const jsonData = data;
 
 			return (
 				<table>
@@ -165,52 +174,51 @@ const View = ({ data }) => {
 					</thead>
 					<tbody>
 						{jsonData.map((entry) => {
-							const queryData = JSON.parse(entry.query);
-							const resultData = JSON.parse(entry.results);
-
 							return (
-								<tr
-									key={
-										entry.id +
-										"for" +
-										entry.studentId +
-										"row"
-									}
-								>
-									<td>{entry.id}</td>
-									<td>
+								<tr key={entry.id + "row"}>
+									<th>{entry.id}</th>
+									<th>
 										<ul>
-											{Object.entries(queryData).map(
-												(queryEntry, index) => {
+											{Object.entries(
+												entry.query.query
+											).map((queryEntry) => {
+												return (
+													<li
+														key={
+															"queryEntryCell" +
+															queryEntry[0] +
+															entry.id
+														}
+													>
+														{queryEntry[0]}:
+														{JSON.stringify(
+															queryEntry[1]
+														)}
+													</li>
+												);
+											})}
+										</ul>
+									</th>
+									<th>
+										<ul>
+											{entry.results.results.map(
+												(result) => {
 													return (
 														<li
 															key={
-																"queryForEntry" +
-																entry.id +
-																index
+																"resultEntryCell" +
+																result.id +
+																entry.id
 															}
 														>
-															{queryEntry[0] +
-																":" +
-																JSON.stringify(
-																	queryEntry[1]
-																)}
+															{result.id}
 														</li>
 													);
 												}
 											)}
 										</ul>
-									</td>
-									<td>
-										<ul>
-											{resultData.map((resultEntry) => {
-												return (
-													<li>{resultEntry.id}</li>
-												);
-											})}
-										</ul>
-									</td>
-									<td>ID#:{entry.studentId}</td>
+									</th>
+									<th>{entry.studentId}</th>
 								</tr>
 							);
 						})}
@@ -262,9 +270,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 	name ? (data = await fetchTableByName(name as string)) : (data = null);
 
+	data && name !== "searches" ? (data = JSON.stringify(data)) : data;
 	return {
 		props: {
-			data: data ? JSON.stringify(data) : null,
+			data: data,
 		},
 	};
 };
