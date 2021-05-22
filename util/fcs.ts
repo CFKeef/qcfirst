@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import prisma from "./prisma";
 
 export const makeTimeStringPretty = (time: string): string => {
@@ -17,15 +20,8 @@ export const makeTimeStringPretty = (time: string): string => {
 	return `${convertedHour}:${convertedMinutes}${isAm ? "AM" : "PM"}`;
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const fetchDataByTableName = async (table: string) => {
 	switch (table) {
-		case "searches":
-			return await prisma.searches.findMany({
-				include: {
-					searchedBy: true,
-				},
-			});
 		case "instructor":
 			return await prisma.instructor.findMany({
 				include: {
@@ -37,6 +33,12 @@ export const fetchDataByTableName = async (table: string) => {
 				include: {
 					coursesEnrolled: true,
 					searches: true,
+				},
+			});
+		case "searches":
+			return await prisma.searches.findMany({
+				include: {
+					searchedBy: true,
 				},
 			});
 		default:
