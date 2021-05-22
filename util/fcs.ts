@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-//@ts-nocheck
 import prisma from "./prisma";
 
-export const makeTimeStringPretty = (time: string) => {
+export const makeTimeStringPretty = (time: string): string => {
 	const [hour, minutes] = time.split(":");
 
 	const parsedHour = parseInt(hour),
@@ -20,6 +17,7 @@ export const makeTimeStringPretty = (time: string) => {
 	return `${convertedHour}:${convertedMinutes}${isAm ? "AM" : "PM"}`;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const fetchDataByTableName = async (table: string) => {
 	switch (table) {
 		case "searches":
