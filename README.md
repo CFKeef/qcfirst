@@ -4,7 +4,7 @@
 
 A course management system for students and professors. [Visit Here](www.coursor.io)
 
-## Tean
+## Team
 -Patryck Golebiewski
 
 ## Contributions
