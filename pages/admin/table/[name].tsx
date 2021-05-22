@@ -233,7 +233,7 @@ const View = ({ data }) => {
 			return generateInstructorTable();
 		} else if (router.query.name === "course") {
 			return generateCoursesTable();
-		} else if (router.query.name === "searches") {
+		} else if (router.query.name === "search") {
 			return generateSearchesTable();
 		}
 	};
@@ -270,7 +270,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 	name ? (data = await fetchTableByName(name as string)) : (data = null);
 
-	data && name !== "searches" ? (data = JSON.stringify(data)) : data;
+	data && name !== "search" ? (data = JSON.stringify(data)) : data;
+
 	return {
 		props: {
 			data: data,

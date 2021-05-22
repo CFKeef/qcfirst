@@ -35,9 +35,9 @@ const DatabaseView = () => {
 						<SlimButton>Course</SlimButton>
 					</a>
 				</Link>
-				<Link href={"/admin/table/searches"}>
+				<Link href={"/admin/table/search"}>
 					<a>
-						<SlimButton>Searches</SlimButton>
+						<SlimButton>Search</SlimButton>
 					</a>
 				</Link>
 			</TableGrid>
