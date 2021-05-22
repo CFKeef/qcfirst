@@ -14,11 +14,7 @@ const TableGrid = styled.div`
 	width: 100%;
 `;
 
-interface DBViewProps {
-	setView: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const DatabaseView: React.FunctionComponent<DBViewProps> = () => {
+const DatabaseView = () => {
 	return (
 		<React.Fragment>
 			<PageTitleText>Admin Panel</PageTitleText>
