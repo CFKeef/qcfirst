@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+//@ts-nocheck
 import prisma from "./prisma";
 
 export const makeTimeStringPretty = (time: string) => {
