@@ -46,7 +46,7 @@ export const fetchTableByName = async (name: string) => {
 		case "course":
 			return await prisma.course.findMany();
 		case "search":
-			return await prisma.searches.findMany({});
+			return await prisma.$queryRaw(`Select * FROM "Searches"`);
 		default:
 			return null;
 	}
