@@ -117,7 +117,7 @@ const ClassCard: React.FunctionComponent<ClassCardProps> = ({
 }) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
-	const [errMsg, setErrMsg] = useState("");
+	const [, setErrMsg] = useState("");
 
 	const history = useRouter();
 

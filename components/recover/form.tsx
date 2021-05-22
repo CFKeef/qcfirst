@@ -23,8 +23,7 @@ const IconInputContainer = styled.div`
 const Form: React.FunctionComponent = () => {
 	const history = useRouter();
 	const { register, handleSubmit } = useForm<FormData>();
-	const onSubmit = (data: FormData) => {
-		console.log(data);
+	const onSubmit = () => {
 		history.push("/success/recovery");
 	};
 

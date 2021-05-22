@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import nc from "next-connect";
 import { NextApiResponse } from "next";
 import { AuthorizedRequest } from "../../../types/util";
 import prisma from "../../../util/prisma";
 import withSession from "../../../util/session";
-import { Course, Student } from "@prisma/client";
+import { Course } from "@prisma/client";
 
 type EnrollmentRequest = {
 	courseID: number;

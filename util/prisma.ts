@@ -9,4 +9,29 @@ if (process.env.NODE_ENV === "production") {
 	prisma = global.prisma;
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const fetchTableByName = async (name: string) => {
+	switch (name) {
+		case "student":
+			return await prisma.student.findMany({
+				include: {
+					coursesEnrolled: true,
+				},
+			});
+		case "instructor":
+			return await prisma.instructor.findMany({
+				include: {
+					coursesTeaching: true,
+				},
+			});
+		case "course":
+			return await prisma.course.findMany();
+		case "searches":
+			return await prisma.searches.findMany();
+		default:
+			return null;
+	}
+};
+
 export default prisma;

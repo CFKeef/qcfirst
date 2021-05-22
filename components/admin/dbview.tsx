@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { PageTitleText } from "../../pages/create";
-import { QueryFunction } from "react-query";
+import Link from "next/link";
+import { SlimButton } from "../general/styledcomponents";
 
 const TableGrid = styled.div`
 	display: grid;
@@ -17,11 +18,32 @@ interface DBViewProps {
 	setView: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const DatabaseView: React.FunctionComponent<DBViewProps> = ({ setView }) => {
+const DatabaseView: React.FunctionComponent<DBViewProps> = () => {
 	return (
 		<React.Fragment>
 			<PageTitleText>Admin Panel</PageTitleText>
-			<TableGrid></TableGrid>
+			<TableGrid>
+				<Link href={"/admin/table/student"}>
+					<a>
+						<SlimButton>Student</SlimButton>
+					</a>
+				</Link>
+				<Link href={"/admin/table/instructor"}>
+					<a>
+						<SlimButton>Instructor</SlimButton>
+					</a>
+				</Link>
+				<Link href={"/admin/table/course"}>
+					<a>
+						<SlimButton>Course</SlimButton>
+					</a>
+				</Link>
+				<Link href={"/admin/table/searches"}>
+					<a>
+						<SlimButton>Searches</SlimButton>
+					</a>
+				</Link>
+			</TableGrid>
 		</React.Fragment>
 	);
 };
