@@ -32,7 +32,7 @@ I did everything which involved designing it first, then bringing it to reality 
   * [Search - Protected by session so you need to log in](https://coursor.io/search)
 * Day and night toggle appears on all pages. Interacting with it shifts the themes
   * [Sign In Toggle](https://coursor.io/)
-* SWR Pattern can be immediately seen when logging into your dashboard or searching for courses. ITs the process of fetching data and
+* SWR Pattern can be immediately seen when logging into your dashboard or searching for courses.
   * [Dashboard - Protected by session so you need to log in](https://coursor.io/dashboard)
   * [Search - Protected by session so you need to log in](https://coursor.io/search)
  
