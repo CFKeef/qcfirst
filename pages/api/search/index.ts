@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import nc from "next-connect";
 import { NextApiResponse } from "next";
 import { AuthorizedRequest } from "../../../types/util";
