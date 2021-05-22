@@ -2,20 +2,26 @@
 
 # Coursor
 
-A course management system for students and professors. Written by me :)
+A course management system for students and professors. [Visit Here](www.coursor.io)
+
+## Tean
+-Patryck Golebiewski
+
+## Contributions
+I did everything which involved designing it first, then bringing it to reality with front end and lastly the backend
 
 ### Features
-
--Handles both students and teachers
-
--   Students are able to view courses enrolled, courses offered and enroll into new ones
--   Teachers are able to view courses they are teaching and create new courses
-
--All CRUD operations are supported
-
--Day/Night theme
-
--Stale while revalidate pattern
+* Supports different user types (Students and Professors for now but can easily expand it)
+  * Roles decide what is rendered on the server than sent off to the user
+* Student's Actions:
+  * View and drop courses enrolled
+  * View and enroll in courses offered
+* Instructor's Actions:
+  * Create and manage courses
+  * View courses they are teaching
+* All CRUD operations are supported
+* Day/Night theme
+* Stale while revalidate pattern
 
 ### Technology
 
