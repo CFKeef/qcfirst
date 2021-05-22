@@ -15,8 +15,8 @@ interface SearchFormRequest extends SearchForm {
 const updateSearches = async (query: Query, results: Course[], id: number) => {
 	await prisma.searches.create({
 		data: {
-			query: JSON.stringify(query),
-			results: JSON.stringify(results),
+			query: JSON.parse(query),
+			results: JSON.parse(results),
 			searchedBy: {
 				connect: {
 					id: id,

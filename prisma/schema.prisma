@@ -49,7 +49,7 @@ model Course {
 model Searches {
   id         Int     @id @default(autoincrement())
   searchedBy Student @relation(references: [id], fields: [studentId])
-  query      Json    @db.Json
-  results    Json    @db.Json
+  query      String
+  results    String
   studentId  Int
 }
